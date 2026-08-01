@@ -20,7 +20,7 @@ const experience = [
 		period: 'Jul 2023 - Present',
 		current: true,
 		bullets: [
-			'Designed, developed, and published several games, handling programming, art, audio, and release from concept to post-launch updates. Accumulated 1,700+ views, 700+ plays, and game jam awards such as top 3% enjoyment ranking in GMTK Game Jam 2025.'
+			'Designed, developed, and published several games, handling programming, art, audio, and release from concept to post-launch updates. Accumulated 1,700+ views and 700+ plays on itch.io.'
 		]
 	},
 	{
@@ -51,7 +51,7 @@ const projects = [
 		],
 		period: 'Apr 2026',
 		bullets: [
-			'Won "Most Innovative Game" at Purdue GDN\'s Ultimate Game Jam 2026. Clean all surfaces as fast as possible. Designed and implemented vacuuming mechanics and a plug-and-play level development architecture in under 48 hours.'
+			'Won "Most Innovative Game" at Purdue GDN Ultimate Game Jam 2026. Clean all surfaces as fast as possible. Designed and implemented vacuuming mechanics and a plug-and-play level development architecture in under 48 hours.'
 		],
 	},
 	{
@@ -100,7 +100,7 @@ const contacts = [
 ];
 ---
 
-<html lang="en">
+<html lang="en" data-theme="0">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -122,9 +122,14 @@ const contacts = [
 	<body id="top">
 		<main>
 			<div>
-				<a class="home-logo" href="#top" aria-label="Back to top">
+				<button
+					class="home-logo"
+					type="button"
+					aria-label="Cycle color theme"
+					data-theme-toggle
+				>
 					<span class="home-logo-mark" style={`--logo-mask: url('${logo.src}')`}></span>
-				</a>
+				</button>
 			</div>
 			<br>
 			<header>
@@ -201,5 +206,21 @@ const contacts = [
 				</ul>
 			</section>
 		</main>
+		<script is:inline>
+			const root = document.documentElement;
+			const toggle = document.querySelector('[data-theme-toggle]');
+			const themeCount = Number.parseInt(getComputedStyle(root).getPropertyValue('--theme-count'), 10) || 1;
+
+			const setTheme = (index) => {
+				root.dataset.theme = String(((index % themeCount) + themeCount) % themeCount);
+			};
+
+			setTheme(Number.parseInt(root.dataset.theme || '0', 10) || 0);
+
+			toggle?.addEventListener('click', () => {
+				const currentTheme = Number.parseInt(root.dataset.theme || '0', 10) || 0;
+				setTheme(currentTheme + 1);
+			});
+		</script>
 	</body>
 </html>
