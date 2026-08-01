@@ -1,6 +1,6 @@
 :root {
 	--theme-count: 7;
-	--transition-speed: 420ms;
+	--transition-speed: 110ms;
 	--transition-easing: ease;
 	--bg: #eeeeee;
 	--main: #101010;
@@ -32,7 +32,7 @@
 }
 
 :root[data-theme="6"] {
-	--accent: #784a78;
+	--accent: #782a78;
 }
 
 html {
@@ -94,6 +94,8 @@ section {
 	padding: 0;
 	color: inherit;
 	cursor: pointer;
+	transform: translateY(0);
+	transition: transform 40ms ease;
 }
 
 .home-logo-mark {
@@ -295,9 +297,17 @@ a:focus-visible {
 	outline-offset: 0.35rem;
 }
 
+.home-logo:active {
+	transform: translateY(0.3rem);
+}
+
 .home-logo:hover .home-logo-mark,
 .home-logo:focus-visible .home-logo-mark {
-	transform: scale(1.06);
+	/* transform: scale(1.06); */
+}
+
+.home-logo:active .home-logo-mark {
+	transform: translateY(-0.12rem);
 }
 
 h1,

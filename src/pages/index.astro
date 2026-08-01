@@ -15,7 +15,7 @@ const experience = [
 	},
 	{
 		role: 'Independent Game Developer',
-		org: 'Fallingdani Games',
+		org: 'fallingdani Games',
 		orgLink: 'https://fallingdani.itch.io/',
 		period: 'Jul 2023 - Present',
 		current: true,
@@ -25,12 +25,12 @@ const experience = [
 	},
 	{
 		role: 'Lead Software Researcher',
-		org: 'TDM x Caterpillar',
-		orgLink: 'https://datamine.purdue.edu/',
+		org: 'The Data Mine x Caterpillar Inc.',
+		orgLink: 'https://datamine.purdue.edu/caterpillar/',
 		period: 'Aug 2025 - May 2026',
 		current: false,
 		bullets: [
-			'Led the backend team for an AI-powered industrial data analysis platform built with FastAPI. Designed an MCP server and LLM orchestration pipeline to automate data analysis and visualization from natural-language queries.'
+			'Led the backend team for an AI-powered machine data analysis platform built with FastAPI. Designed an MCP server and LLM orchestration pipeline to automate data analysis and visualization from natural-language queries.'
 		]
 	},
 ];
@@ -87,7 +87,21 @@ const projects = [
 		],
 		period: 'Aug 2024 - Jan 2026',
 		bullets: [
-			'2D action platformer roguelike built with Purdue ACM SIGGD. Developed 17 enemy types and four boss encounters in Unity while improving enemy architecture as part of a 20+ member team.'
+			'2D action platformer roguelike built with Purdue ACM SIGGD. Developed 17 enemy types and four boss encounters in Unity while refining enemy architecture as part of a 20+ member team.'
+		],
+	},
+	{
+		name: 'Transform 311',
+		description: 'ELT Data Engineering Pipeline',
+		links: [
+			{
+				label: 'Github',
+				href: 'https://github.com/ng-daniel/nyc311',
+			},
+		],
+		period: 'Mar 2026',
+		bullets: [
+			'End-to-end data pipeline for NYC 311 service request data using Python, Polars, PostgreSQL, dbt, and Docker. Implemented incremental ingestion, medallion architecture, and automated dbt data quality tests for complaint trend analysis, agency performance, and geospatial analytics.'
 		],
 	},
 ];
@@ -103,8 +117,7 @@ const contacts = [
 <html lang="en" data-theme="0">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" href="/almost-white.png" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta
@@ -135,7 +148,7 @@ const contacts = [
 			<header>
 
 				<p>
-					Hi, I'm Daniel Ng! I'm a game developer and software engineer based in NYC pursuing a 
+					Hi, I'm Daniel Ng. I'm a game dev and software engineer based in NYC pursuing a 
 					Bachelors in CS at Purdue University.
 					I have 3+ years of experience making interactive experiences in Unity and C#, 
 					and 2+ years of experience building backend systems in Python and C++.
@@ -159,7 +172,7 @@ const contacts = [
 							<div class="timeline-marker" aria-hidden="true"></div>
 							<div class="experience-copy">
 								<p class="meta">{item.period}</p>
-								<p class="entry-title">{item.role} @ <a href={item.orgLink} target="_blank" rel="noreferrer">{item.org}</a></p>
+								<p class="entry-title">{item.role} <a href={item.orgLink} target="_blank" rel="noreferrer">@ {item.org}</a></p>
 								<ul class="dash-list">
 									{item.bullets.map((bullet) => (
 										<li>{bullet}</li>
