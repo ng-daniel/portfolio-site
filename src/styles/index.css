@@ -45,6 +45,20 @@ section {
 	margin: 0 0 2rem;
 }
 
+.home-logo {
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: fit-content;
+	margin: 0 0 1rem;
+}
+
+.home-logo img {
+	display: block;
+	width: clamp(4rem, 10vw, 5.5rem);
+	height: auto;
+}
+
 article {
 	margin: 0 0 1.5rem;
 }
@@ -198,6 +212,12 @@ a:hover,
 a:focus-visible {
 	text-decoration: underline;
 	text-underline-offset: 0.15em;
+}
+
+.home-logo:hover,
+.home-logo:focus-visible {
+	opacity: 0.78;
+	text-decoration: none;
 }
 
 @media (max-width: 640px) {

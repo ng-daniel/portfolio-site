@@ -1,15 +1,16 @@
 ---
+import logo from "../assets/fallingdani-logo-black.png";
 import "../styles/index.css";
 
 const experience = [
 	{
 		role: 'Software Engineer',
-		org: 'Purdue Envision Center RCAC',
+		org: 'Purdue Envision Center',
 		orgLink: 'https://www.rcac.purdue.edu/envision',
 		period: 'Mar 2026 - Present',
 		current: true,
 		bullets: [
-			'Developing multiplayer XR applications for interactive data visualization in Unity and fluid dynamics educational tools. Improved runtime stability by implementing a fixed-buffer memory system and reverse-engineering legacy AWS S3 asset-loading pipelines.'
+			'Developing multiplayer XR applications for interactive data visualization in Unity and educational fluid dynamics tools. Improved runtime stability by implementing a fixed-buffer memory system and reverse-engineering legacy AWS S3 asset-loading pipelines.'
 		]
 	},
 	{
@@ -19,7 +20,7 @@ const experience = [
 		period: 'Jul 2023 - Present',
 		current: true,
 		bullets: [
-			'Designed, developed, and published nine Unity games, handling programming, art, audio, and release from concept to post-launch updates. Accumulated 1,700+ views, 700+ plays, and game jam awards such as top 3% enjoyment ranking in GMTK Game Jam 2025.'
+			'Designed, developed, and published several games, handling programming, art, audio, and release from concept to post-launch updates. Accumulated 1,700+ views, 700+ plays, and game jam awards such as top 3% enjoyment ranking in GMTK Game Jam 2025.'
 		]
 	},
 	{
@@ -73,10 +74,16 @@ const contacts = [
 		/>
 		<title>Daniel Ng</title>
 	</head>
-	<body>
+	<body id="top">
 		<main>
+			<div>
+				<a class="home-logo" href="#top" aria-label="Back to top">
+					<img src={logo.src} alt="Daniel Ng logo" />
+				</a>
+			</div>
+			<br>
 			<header>
-				<p></p>
+
 				<p>
 					Hi, I'm Daniel Ng! I'm a game developer and software engineer pursuing a 
 					Bachelors in CS at Purdue University.
@@ -84,7 +91,12 @@ const contacts = [
 					and 2+ years of experience building backend systems in Python and C++.
 				</p>
 				<p>
-					I'm currently a Software Engineer at Purdue Envision Center RCAC, where I build 
+					With 10 total game jam completions, most under 72 hours and some with top placements, 
+					I’m on a first-name basis with the game development lifecycle, from starting a fresh 
+					design document to architecting robust game systems and iterating on player feedback.
+				</p>
+				<p>
+					I'm currently a Software Engineer for realtime simulations at the Envision Center, where I build 
 					interactive applications for research and education.
 				</p>
 			</header>
@@ -127,7 +139,7 @@ const contacts = [
 			</section>
 
 			<section aria-labelledby="contact">
-				<h2 id="contact">get in touch!</h2>
+				<h2 id="contact">contact</h2>
 				<ul>
 					{contacts.map((contact) => (
 						<li>
