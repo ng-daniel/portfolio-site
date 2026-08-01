@@ -1,5 +1,60 @@
 ---
+const experience = [
+	{
+		role: 'Software Engineer',
+		org: 'Purdue Envision Center RCAC',
+		orgLink: 'https://www.rcac.purdue.edu/envision',
+		period: 'Mar 2026 - Present',
+		bullets: [
+			'Developed features for a multiplayer XR application for interactive data visualization, and a fluid dynamics lab exploring high-resolution scientific datasets',
+			'Eliminated "OOM" runtime crashes by designing a fixed-buffer memory allocation system',
+			'Reverse-engineered legacy asset-loading pipelines from AWS S3 through Unity runtime systems'
+		]
+	},
+	{
+		role: 'Lead Software Researcher',
+		org: 'TDM x Caterpillar',
+		orgLink: 'https://datamine.purdue.edu/',
+		period: 'Aug 2025 - May 2026',
+		bullets: [
+			'Led a backend subteam of 4-5 members building a FastAPI REST architecture for an AI-powered machine data analysis platform.',
+			'Implemented an MCP server exposing custom analysis and visualization tools including statistics, histograms, time-series graphs, and geospatial mapping.',
+			'Developed an LLM orchestration pipeline for multi-step analysis and visualization from user queries.'
+		]
+	},
+	{
+		role: 'Independent Game Developer',
+		org: 'Fallingdani Games',
+		orgLink: 'https://fallingdani.itch.io/',
+		period: 'Jul 2023 - Present',
+		bullets: [
+			'Developed and published 9 Unity games, owning architecture, gameplay systems, playtesting, deployment, and post-release iteration.',
+			'Shipped multiple releases from 0-1 under 2-3 day competition deadlines, including a top 3% enjoyment placement among 9000+ GMTK 2025 entries.',
+			'Reached 1,700+ views and 700+ plays on itch.io while also creating art, animation, and audio assets.'
+		]
+	}
+];
 
+const projects = [
+	{
+		name: 'Echoes of Isovios',
+		description: '2D Action Platformer Roguelike',
+		projectLink: 'https://store.steampowered.com/app/4363270/Echoes_of_Isovios_A_Legacy_Undone/',
+		period: 'Sep 2024 - Jan 2026',
+		bullets: [
+			'Developed 17 enemy classes and all 4 major boss encounters for a Steam-published Unity game using C#, finite state machines, and animation events.',
+			'Refactored enemy behavior architecture to separate shared logic from single-purpose behaviors for faster prototyping and balancing.',
+			'Worked with a 20+ member team using Git and GitHub to ship a complete game.'
+		]
+	}
+];
+
+const contacts = [
+	{ label: 'email', value: '71danielng@gmail.com', href: 'mailto:71danielng@gmail.com' },
+	{ label: 'github', value: 'github.com/ng-daniel', href: 'https://github.com/ng-daniel' },
+	{ label: 'linkedin', value: 'linkedin.com/in/ngdaniel17', href: 'https://www.linkedin.com/in/ngdaniel17/' },
+	{ label: 'itch.io', value: 'fallingdani.itch.io', href: 'https://fallingdani.itch.io/' }
+];
 ---
 
 <html lang="en">
@@ -9,9 +64,247 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta
+			name="description"
+			content="Daniel Ng is a game developer and software engineer building systems in Unity, C#, Python, and C++."
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<title>Daniel Ng</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<main>
+			<header>
+				<h1>
+					hi, I'm daniel ng!
+				</h1>
+				<p class="lead">
+					I'm a game developer and software engineer pursuing a 
+					Bachelors in CS at Purdue University.
+				</p>
+				<p>
+					I have 3+ years of experience making interactive experiences in Unity and C#, 
+					and 2+ years of experience building backend systems in Python and C++.
+				</p>
+				<p>
+					I'm currently a Software Engineer at Purdue Envision Center RCAC, where I build 
+					interactive applications for research and education.
+				</p>
+			</header>
+
+			<section aria-labelledby="experience">
+				<h2 id="experience">experience</h2>
+				{experience.map((item) => (
+					<article>
+						<p class="entry-title">{item.role} <em>@ <a href={item.orgLink} target="_blank" rel="noreferrer">{item.org}</a></em></p>
+						<p class="meta">{item.period}</p>
+						<ul class="dash-list">
+							{item.bullets.map((bullet) => (
+								<li>{bullet}</li>
+							))}
+						</ul>
+					</article>
+				))}
+			</section>
+
+			<section aria-labelledby="projects">
+				<h2 id="projects">projects</h2>
+				{projects.map((project) => (
+					<article>
+						<p class="entry-title">{project.name} <em>- {project.description}</em></p>
+						<p class="meta">{project.period}</p>
+						<a href={project.projectLink} target="_blank" rel="noreferrer">View Project</a>
+						<ul class="dash-list">
+							{project.bullets.map((bullet) => (
+								<li>{bullet}</li>
+							))}
+						</ul>
+					</article>
+
+				))}
+			</section>
+
+			<section aria-labelledby="contact">
+				<h2 id="contact">get in touch!</h2>
+				<ul>
+					{contacts.map((contact) => (
+						<li>
+							<span>{contact.label}</span>
+							<a href={contact.href} target="_blank" rel="noreferrer">{contact.value}</a>
+						</li>
+					))}
+				</ul>
+			</section>
+		</main>
 	</body>
 </html>
+
+<style>
+	:global(html) {
+		background: #fff;
+		--accent: #5555ff;
+		color: #000;
+		font-family: 'Instrument Sans', sans-serif;
+		font-size: 16px;
+		line-height: 1.45;
+	}
+
+	:global(body) {
+		margin: 0;
+		min-height: 100vh;
+	}
+
+	main {
+		box-sizing: border-box;
+		max-width: 40rem;
+		padding: 3rem 1.5rem 4rem;
+		margin-left: clamp(1rem, 7vw, 6rem);
+		margin-top: 2rem;
+	}
+
+	h1,
+	header,
+	section,
+	article,
+	ul,
+	li,
+	p,
+	h2,
+	a,
+	span {
+		font-size: inherit;
+	}
+
+	header,
+	section {
+		margin: 0 0 2rem;
+	}
+
+	article {
+		margin: 0 0 1.5rem;
+	}
+
+	h1,
+	h2,
+	p,
+	ul {
+		margin: 0;
+	}
+
+	h1 {
+		font-size: clamp(2rem, 5vw, 3.4rem);
+		font-weight: 600;
+		line-height: 1;
+		letter-spacing: -0.05em;
+		margin-bottom: 1rem;
+	}
+
+	h2 {
+		color: var(--accent);
+		font-size: 0.82rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		margin-bottom: 1rem;
+		text-transform: lowercase;
+	}
+
+	.lead {
+		font-size: 1.15rem;
+		line-height: 1.35;
+	}
+
+	.entry-title {
+		font-size: 1.02rem;
+		font-weight: 600;
+	}
+
+	.meta {
+		color: var(--accent);
+		font-size: 0.84rem;
+		letter-spacing: 0.02em;
+	}
+
+	em {
+		font-style: italic;
+		font-weight: 400;
+	}
+
+	article > p + p,
+	header > p + p {
+		margin-top: 0.45rem;
+	}
+
+	@counter-style dash-marker {
+		system: cyclic;
+		symbols: ">";
+		suffix: "    ";
+	}
+
+	.dash-list {
+		list-style-type: dash-marker;
+	}
+
+	ul {
+		padding-left: 1.6rem;
+		margin-top: 0.6rem;
+	}
+
+	li {
+		margin: 0 0 0.45rem;
+	}
+
+	li:last-child {
+		margin-bottom: 0;
+	}
+
+	section:last-child ul {
+		margin-top: 0;
+	}
+
+	section:last-child li {
+		display: flex;
+		gap: 0.75rem;
+		align-items: baseline;
+	}
+
+	section:last-child span {
+		flex: 0 0 4.5rem;
+	}
+
+	a {
+		color: var(--accent);
+		text-decoration: none;
+	}
+
+	a:hover,
+	a:focus-visible {
+		/* color: #fff; */
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+
+	@media (max-width: 640px) {
+		:global(html) {
+			font-size: 16px;
+		}
+
+		main {
+			max-width: none;
+			padding-top: 2rem;
+			margin-left: 0;
+		}
+
+		section:last-child li {
+			display: block;
+		}
+
+		section:last-child span {
+			display: block;
+			margin-bottom: 0.1rem;
+		}
+	}
+</style>
