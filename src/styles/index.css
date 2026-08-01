@@ -53,10 +53,19 @@ section {
 	margin: 0 0 1rem;
 }
 
-.home-logo img {
+.home-logo-mark {
 	display: block;
 	width: clamp(4rem, 10vw, 5.5rem);
-	height: auto;
+	aspect-ratio: 1;
+	background: var(--main);
+	mask-image: var(--logo-mask);
+	mask-repeat: no-repeat;
+	mask-position: center;
+	mask-size: contain;
+	-webkit-mask-image: var(--logo-mask);
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	-webkit-mask-size: contain;
 	transition: transform 140ms ease;
 }
 
@@ -242,8 +251,8 @@ a:focus-visible {
 	text-decoration: none;
 }
 
-.home-logo:hover img,
-.home-logo:focus-visible img {
+.home-logo:hover .home-logo-mark,
+.home-logo:focus-visible .home-logo-mark {
 	transform: scale(1.06);
 }
 
