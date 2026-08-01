@@ -39,12 +39,21 @@ const projects = [
 	{
 		name: 'Echoes of Isovios',
 		description: '2D Action Platformer Roguelike',
-		projectLink: 'https://store.steampowered.com/app/4363270/Echoes_of_Isovios_A_Legacy_Undone/',
-		period: 'Sep 2024 - Jan 2026',
+		links: [
+			{
+				label: 'Play on Steam',
+				href: 'https://store.steampowered.com/app/4363270/Echoes_of_Isovios_A_Legacy_Undone/',
+			},
+			{
+				label: 'Github',
+				href: 'https://github.com/PurdueSIGGD/SIGGD-Game-2024',
+			},
+		],
+		period: 'Aug 2024 - Jan 2026',
 		bullets: [
 			'2D action platformer roguelike built with Purdue ACM SIGGD. Developed 17 enemy types and four boss encounters in Unity while improving enemy architecture as part of a 20+ member team.'
 		],
-	}
+	},
 ];
 
 const contacts = [
@@ -124,10 +133,16 @@ const contacts = [
 			<section aria-labelledby="projects">
 				<h2 id="projects">projects</h2>
 				{projects.map((project) => (
-					<article>
-						<p class="entry-title">{project.name} <em>- {project.description}</em></p>
+					<article class="project-item">
+						<div class="project-head">
+							<p class="entry-title">{project.name} <em>- {project.description}</em></p>
+							<div class="project-links">
+								{project.links.map((link) => (
+									<a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+								))}
+							</div>
+						</div>
 						{/* <p class="meta">{project.period}</p> */}
-						<a href={project.projectLink} target="_blank" rel="noreferrer">View Project</a>
 						<ul class="dash-list">
 							{project.bullets.map((bullet) => (
 								<li>{bullet}</li>
