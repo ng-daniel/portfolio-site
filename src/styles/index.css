@@ -8,45 +8,31 @@
 }
 
 :root[data-theme="0"] {
-	--bg: #eeeeee;
-	--main: #101010;
 	--accent: #101010;
 }
 
 :root[data-theme="1"] {
-	--bg: #ea6d6d;
-	--main: #073467;
-	--accent: #ffbc36;
+	--accent: #ea6d6d;
 }
 
 :root[data-theme="2"] {
-	--bg: #29012a;
-	--main: #ffe78a;
-	--accent: #1c6256;
+	--accent: #eda031;
 }
 
 :root[data-theme="3"] {
-	--bg: #6495ed;
-	--main: #fff8dc;
-	--accent: #fff8dc;
+	--accent: #dfc05e;
 }
 
 :root[data-theme="4"] {
-	--bg: #9775a6;
-	--main: #412752;
-	--accent: #683a68;
+	--accent: #1cc256;
 }
 
 :root[data-theme="5"] {
-	--bg: #eda031;
-	--main: #272946;
-	--accent: #e7ffee;
+	--accent: #6495ed;
 }
 
 :root[data-theme="6"] {
-	--bg: #31402c;
-	--main: #e7e9ac;
-	--accent: #c49825;
+	--accent: #784a78;
 }
 
 html {
@@ -114,7 +100,7 @@ section {
 	display: block;
 	width: clamp(4rem, 10vw, 5.5rem);
 	aspect-ratio: 1;
-	background: var(--main);
+	background: var(--accent);
 	mask-image: var(--logo-mask);
 	mask-repeat: no-repeat;
 	mask-position: center;
