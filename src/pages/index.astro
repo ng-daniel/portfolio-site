@@ -7,17 +7,9 @@ const experience = [
 		org: 'Purdue Envision Center RCAC',
 		orgLink: 'https://www.rcac.purdue.edu/envision',
 		period: 'Mar 2026 - Present',
+		current: true,
 		bullets: [
 			'Developing multiplayer XR applications for interactive data visualization in Unity and fluid dynamics educational tools. Improved runtime stability by implementing a fixed-buffer memory system and reverse-engineering legacy AWS S3 asset-loading pipelines.'
-		]
-	},
-	{
-		role: 'Lead Software Researcher',
-		org: 'TDM x Caterpillar',
-		orgLink: 'https://datamine.purdue.edu/',
-		period: 'Aug 2025 - May 2026',
-		bullets: [
-			'Led the backend team for an AI-powered industrial data analysis platform built with FastAPI. Designed an MCP server and LLM orchestration pipeline to automate data analysis and visualization from natural-language queries.'
 		]
 	},
 	{
@@ -25,10 +17,21 @@ const experience = [
 		org: 'Fallingdani Games',
 		orgLink: 'https://fallingdani.itch.io/',
 		period: 'Jul 2023 - Present',
+		current: true,
 		bullets: [
 			'Designed, developed, and published nine Unity games, handling programming, art, audio, and release from concept to post-launch updates. Accumulated 1,700+ views, 700+ plays, and game jam awards such as top 3% enjoyment ranking in GMTK Game Jam 2025.'
 		]
-	}
+	},
+	{
+		role: 'Lead Software Researcher',
+		org: 'TDM x Caterpillar',
+		orgLink: 'https://datamine.purdue.edu/',
+		period: 'Aug 2025 - May 2026',
+		current: false,
+		bullets: [
+			'Led the backend team for an AI-powered industrial data analysis platform built with FastAPI. Designed an MCP server and LLM orchestration pipeline to automate data analysis and visualization from natural-language queries.'
+		]
+	},
 ];
 
 const projects = [
@@ -38,7 +41,7 @@ const projects = [
 		projectLink: 'https://store.steampowered.com/app/4363270/Echoes_of_Isovios_A_Legacy_Undone/',
 		period: 'Sep 2024 - Jan 2026',
 		bullets: [
-			'Steam-published 2D action platformer roguelike. Developed 17 enemy types and four boss encounters in Unity while improving enemy architecture as part of a 20+ developer team.'
+			'2D action platformer roguelike built with Purdue ACM SIGGD. Developed 17 enemy types and four boss encounters in Unity while improving enemy architecture as part of a 20+ member team.'
 		],
 	}
 ];
@@ -86,19 +89,24 @@ const contacts = [
 				</p>
 			</header>
 
-			<section aria-labelledby="experience">
+			<section class="experience-section" aria-labelledby="experience">
 				<h2 id="experience">experience</h2>
-				{experience.map((item) => (
-					<article>
-						<p class="entry-title">{item.role} @ <a href={item.orgLink} target="_blank" rel="noreferrer">{item.org}</a></p>
-						<p class="meta">{item.period}</p>
-						<ul class="dash-list">
-							{item.bullets.map((bullet) => (
-								<li>{bullet}</li>
-							))}
-						</ul>
-					</article>
-				))}
+				<div class="experience-list">
+					{experience.map((item) => (
+						<article class:list={["experience-item", { current: item.current }]}>
+							<div class="timeline-marker" aria-hidden="true"></div>
+							<div class="experience-copy">
+								<p class="meta">{item.period}</p>
+								<p class="entry-title">{item.role} @ <a href={item.orgLink} target="_blank" rel="noreferrer">{item.org}</a></p>
+								<ul class="dash-list">
+									{item.bullets.map((bullet) => (
+										<li>{bullet}</li>
+									))}
+								</ul>
+							</div>
+						</article>
+					))}
+				</div>
 			</section>
 
 			<section aria-labelledby="projects">
@@ -106,7 +114,7 @@ const contacts = [
 				{projects.map((project) => (
 					<article>
 						<p class="entry-title">{project.name} <em>- {project.description}</em></p>
-						<p class="meta">{project.period}</p>
+						{/* <p class="meta">{project.period}</p> */}
 						<a href={project.projectLink} target="_blank" rel="noreferrer">View Project</a>
 						<ul class="dash-list">
 							{project.bullets.map((bullet) => (

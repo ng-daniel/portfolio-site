@@ -1,7 +1,10 @@
 html {
-	background: #eeeeee;
 	--accent: #000;
-	color: #000;
+    --main: #000;
+    --background: #eeeeee;
+	
+    background: var(--background);
+    color: var(--main);
 	font-family: 'Instrument Sans', sans-serif;
 	font-size: 16px;
 	line-height: 1.45;
@@ -46,6 +49,10 @@ article {
 	margin: 0 0 1.5rem;
 }
 
+.experience-section article {
+	margin: 0;
+}
+
 h1,
 h2,
 p,
@@ -77,6 +84,65 @@ h2 {
 .entry-title {
 	font-size: 1.02rem;
 	font-weight: 600;
+}
+
+.experience-section {
+	position: relative;
+}
+
+.experience-list {
+	position: relative;
+}
+
+.experience-list::before {
+	content: "";
+	position: absolute;
+	left: calc(0.625rem - 0.5px);
+	top: 0.5rem;
+	bottom: 0;
+	border-left: 1px solid var(--accent);
+}
+
+.experience-item {
+	display: grid;
+	grid-template-columns: 1.25rem minmax(0, 1fr);
+	column-gap: 1rem;
+	position: relative;
+	padding-bottom: 1.5rem;
+}
+
+.experience-item:last-of-type {
+	padding-bottom: 0;
+}
+
+.timeline-marker {
+	position: relative;
+	justify-self: center;
+	width: 1.25rem;
+	align-self: stretch;
+}
+
+.experience-item.current .timeline-marker::after {
+	background: var(--accent);
+}
+
+.timeline-marker::after {
+	content: "";
+	position: absolute;
+	top: 0.15rem;
+	left: 50%;
+	width: 0.7rem;
+	height: 0.7rem;
+	border: 1px solid var(--accent);
+	border-radius: 999px;
+	background: #eeeeee;
+	transform: translate(-50%, 0);
+	box-sizing: border-box;
+	z-index: 1;
+}
+
+.experience-copy {
+	min-width: 0;
 }
 
 .meta {
@@ -152,5 +218,10 @@ a:focus-visible {
 	section:last-child span {
 		display: block;
 		margin-bottom: 0.1rem;
+	}
+
+	.experience-item {
+		grid-template-columns: 1rem minmax(0, 1fr);
+		column-gap: 0.85rem;
 	}
 }
