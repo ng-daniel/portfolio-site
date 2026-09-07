@@ -1,5 +1,5 @@
 :root {
-	--theme-count: 7;
+	--theme-count: 6;
 	--transition-speed: 110ms;
 	--transition-easing: ease;
 	--bg: #eeeeee;
@@ -8,31 +8,27 @@
 }
 
 :root[data-theme="0"] {
-	--accent: #101010;
-}
-
-:root[data-theme="1"] {
 	--accent: #ea6d6d;
 }
 
+:root[data-theme="1"] {
+	--accent: #fda031;
+}
+
 :root[data-theme="2"] {
-	--accent: #eda031;
+	--accent: #cea01e;
 }
 
 :root[data-theme="3"] {
-	--accent: #dfc05e;
+	--accent: #0cb246;
 }
 
 :root[data-theme="4"] {
-	--accent: #1cc256;
+	--accent: #4465ed;
 }
 
 :root[data-theme="5"] {
-	--accent: #6495ed;
-}
-
-:root[data-theme="6"] {
-	--accent: #782a78;
+	--accent: #a84a98;
 }
 
 html {
@@ -94,6 +90,9 @@ section {
 	padding: 0;
 	color: inherit;
 	cursor: pointer;
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
 	transform: translateY(0);
 	transition: transform 40ms ease;
 }
@@ -134,6 +133,29 @@ section {
 
 .project-links > a {
 	white-space: nowrap;
+}
+
+.skills-list {
+	margin: 0;
+}
+
+.skills-item {
+	display: grid;
+	grid-template-columns: 7rem minmax(0, 1fr);
+	gap: 0.75rem;
+	margin-bottom: 0.45rem;
+}
+
+.skills-item:last-child {
+	margin-bottom: 0;
+}
+
+.skills-item dt {
+	font-weight: 600;
+}
+
+.skills-item dd {
+	margin: 0;
 }
 
 article {
@@ -182,13 +204,14 @@ h2 {
 }
 
 .experience-list {
+	--timeline-column-width: 1.25rem;
 	position: relative;
 }
 
 .experience-list::before {
 	content: "";
 	position: absolute;
-	left: calc(0.625rem - 0.5px);
+	left: calc(var(--timeline-column-width) / 2 - 0.5px);
 	top: 0.5rem;
 	bottom: 0;
 	border-left: 1px solid var(--accent);
@@ -196,7 +219,7 @@ h2 {
 
 .experience-item {
 	display: grid;
-	grid-template-columns: 1.25rem minmax(0, 1fr);
+	grid-template-columns: var(--timeline-column-width) minmax(0, 1fr);
 	column-gap: 1rem;
 	position: relative;
 	padding-bottom: 1.5rem;
@@ -250,6 +273,14 @@ em {
 article > p + p,
 header > p + p {
 	margin-top: 0.45rem;
+}
+
+.intro-links {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: 0.25rem 1rem;
+	margin-top: 0.9rem;
 }
 
 ul {
@@ -342,8 +373,11 @@ em,
 	}
 
 	.experience-item {
-		grid-template-columns: 1rem minmax(0, 1fr);
 		column-gap: 0.85rem;
+	}
+
+	.experience-list {
+		--timeline-column-width: 1rem;
 	}
 
 	.project-head {
@@ -354,5 +388,11 @@ em,
 
 	.project-links {
 		justify-content: flex-start;
+	}
+
+	.skills-item {
+		grid-template-columns: 1fr;
+		gap: 0.1rem;
+		margin-bottom: 0.75rem;
 	}
 }

@@ -4,38 +4,38 @@ import "../styles/index.css";
 
 const experience = [
 	{
-		role: 'Software Engineer',
-		org: 'Purdue Envision Center',
+		role: 'Software Engineer (Realtime Simulation)',
+		org: 'Envision Center',
 		orgLink: 'https://www.rcac.purdue.edu/envision',
-		period: 'Mar 2026 - Present',
+		period: 'Mar 2026 – Present',
 		current: true,
 		bullets: [
-			'Developing multiplayer XR applications for interactive data visualization in Unity and educational fluid dynamics tools. Improved runtime stability by implementing a fixed-buffer memory system and reverse-engineering legacy AWS S3 asset-loading pipelines.'
+			'Developing CollabXR, a mixed realty virtual classroom, and interactive fluid dynamics data visualizations. Improved runtime stability by implementing a fixed-buffer memory system and reverse-engineering legacy AWS S3 asset-loading pipelines.'
 		]
 	},
 	{
 		role: 'Independent Game Developer',
-		org: 'fallingdani Games',
+		org: 'Fallingdani Games',
 		orgLink: 'https://fallingdani.itch.io/',
-		period: 'Jul 2023 - Present',
+		period: 'Jul 2023 – Present',
 		current: true,
 		bullets: [
-			'Designed, developed, and published several games, handling programming, art, audio, and release from concept to post-launch updates. Accumulated 1,700+ views and 700+ plays on itch.io.'
+			'Developed and shipped 11 Unity/C# games under 2–3 day deadlines, earning a top 3% enjoyment ranking among 9,500+ GMTK 2025 entries and 1,700+ views with 700+ plays on itch.io.'
 		]
 	},
 	{
-		role: 'Lead Software Researcher',
-		org: 'The Data Mine x Caterpillar Inc.',
+		role: 'Undergraduate Research Software Engineer',
+		org: 'TDM x Caterpillar Inc.',
 		orgLink: 'https://datamine.purdue.edu/caterpillar/',
-		period: 'Aug 2025 - May 2026',
+		period: 'Aug 2025 – May 2026',
 		current: false,
 		bullets: [
-			'Led the backend team for an AI-powered machine data analysis platform built with FastAPI. Designed an MCP server and LLM orchestration pipeline to automate data analysis and visualization from natural-language queries.'
+			'Led a 4–5 person subteam building a REST API with Python, FastAPI, AWS Bedrock, and Docker, implementing an MCP server with 5+ analysis and visualization tools and a custom LLM orchestration pipeline.'
 		]
 	},
 ];
 
-const projects = [
+const games = [
 	{
 		name: 'Swifter Wet Jet',
 		description: 'Vacuum Cleaner Parkour Speedrunner',
@@ -90,35 +90,75 @@ const projects = [
 			'2D action platformer roguelike built with Purdue ACM SIGGD. Developed 17 enemy types and four boss encounters in Unity while refining enemy architecture as part of a 20+ member team.'
 		],
 	},
+];
+
+const projects = [
 	{
-		name: 'Transform 311',
-		description: 'ELT Data Engineering Pipeline',
+		name: 'Falling Engine',
+		description: 'Data-Oriented Game Engine',
+		links: [
+			{
+				label: 'Github',
+				href: 'https://github.com/ng-daniel/falling-engine',
+			},
+		],
+		period: '2026',
+		bullets: [
+			'Data-oriented C++ game engine with a sparse-set ECS, lazy glTF asset pipeline, and OpenGL renderer. Designed cache-friendly paged storage and GPU resource caching, sustaining 60+ FPS with 36,000+ simulated entities and 32,000+ rendered meshes.',
+		],
+	},
+	{
+		name: 'NYC Service Watch',
+		description: 'Data Engineering & Analytics Pipeline',
 		links: [
 			{
 				label: 'Github',
 				href: 'https://github.com/ng-daniel/nyc311',
 			},
 		],
-		period: 'Mar 2026',
+		period: '2026',
 		bullets: [
-			'End-to-end data pipeline for NYC 311 service request data using Python, Polars, PostgreSQL, dbt, and Docker. Implemented incremental ingestion, medallion architecture, and automated dbt data quality tests for complaint trend analysis, agency performance, and geospatial analytics.'
+			'End-to-end ELT pipeline for NYC service request data using Python, Polars, PostgreSQL, dbt, Streamlit, and Docker. Built incremental ingestion, layered warehouse models, automated data quality tests, pre-aggregated analytics marts, a validation dashboard, and GitHub Actions CI.',
 		],
 	},
 ];
 
-const contacts = [
-	{ label: 'email', value: '71danielng@gmail.com', href: 'mailto:71danielng@gmail.com' },
-	{ label: 'github', value: 'github.com/ng-daniel', href: 'https://github.com/ng-daniel' },
-	{ label: 'linkedin', value: 'linkedin.com/in/ngdaniel17', href: 'https://www.linkedin.com/in/ngdaniel17/' },
-	{ label: 'itch.io', value: 'fallingdani.itch.io', href: 'https://fallingdani.itch.io/' }
+const portfolioSections = [
+	{ id: 'projects', items: projects },
+	{ id: 'games', items: games },
 ];
+
+const skills = [
+	{
+		category: 'languages',
+		items: ['C++', 'C', 'C#', 'GLSL', 'Python', 'SQL', 'Java', 'R', 'HTML/CSS'],
+	},
+	{
+		category: 'frameworks',
+		items: ['OpenGL', 'GLM', 'GLFW', 'FastAPI', 'Streamlit', 'PyTorch', 'NumPy'],
+	},
+	{
+		category: 'tools',
+		items: ['Unity', 'Docker', 'PostgreSQL', 'Git/GitHub', 'GitHub Actions', 'CMake', 'AWS', 'Ollama'],
+	},
+];
+
+const contacts = [
+	{ label: 'email', quickLabel: 'Email', value: '71danielng@gmail.com', href: 'mailto:71danielng@gmail.com' },
+	{ label: 'github', quickLabel: 'GitHub', value: 'github.com/ng-daniel', href: 'https://github.com/ng-daniel' },
+	{ label: 'linkedin', quickLabel: 'LinkedIn', value: 'linkedin.com/in/ngdaniel17', href: 'https://www.linkedin.com/in/ngdaniel17/' },
+	{ label: 'itch.io', quickLabel: null, value: 'fallingdani.itch.io', href: 'https://fallingdani.itch.io/' },
+	{ label: 'resume', quickLabel: 'Resume', value: 'view resume', href: '/daniel_ng_resume.pdf' }
+];
+
+const quickContacts = contacts.filter((contact) => contact.quickLabel);
 ---
 
 <html lang="en" data-theme="0">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="/almost-white.png" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta
 			name="description"
@@ -131,6 +171,14 @@ const contacts = [
 			rel="stylesheet"
 		/>
 		<title>Daniel Ng</title>
+		<script is:inline>
+			try {
+				const savedTheme = localStorage.getItem('portfolio-theme');
+				if (savedTheme !== null) document.documentElement.dataset.theme = savedTheme;
+			} catch {
+				// The default theme remains available when browser storage is disabled.
+			}
+		</script>
 	</head>
 	<body id="top">
 		<main>
@@ -148,20 +196,25 @@ const contacts = [
 			<header>
 
 				<p>
-					Hi, I'm Daniel Ng. I'm a game dev and software engineer based in NYC pursuing a 
-					Bachelors in CS at Purdue University.
-					I have 3+ years of experience making interactive experiences in Unity and C#, 
-					and 2+ years of experience building backend systems in Python and C++.
+					Hi, I'm Daniel Ng.
 				</p>
 				<p>
-					With 10 total game jam completions, most under 72 hours and some with top placements, 
-					I’m on a first-name basis with the game development lifecycle, from starting a fresh 
-					design document to architecting robust game systems and iterating on player feedback.
+					I'm a game developer and software engineer based in NY pursuing a 
+					Bachelors in CS at Purdue University with a Graphics concentration.
 				</p>
 				<p>
-					I'm currently a Software Engineer for realtime simulations at the Envision Center, where I build 
-					interactive applications for research and education.
+					With 3+ years of experience in games and software, and 10 completed game jams,
+					I bring strong fundamentals and creative engineering solutions to any team.
 				</p>
+				<nav class="intro-links" aria-label="Contact and profile links">
+					{quickContacts.map((contact) => (
+						<a
+							href={contact.href}
+							target={contact.href.startsWith('mailto:') ? undefined : '_blank'}
+							rel={contact.href.startsWith('mailto:') ? undefined : 'noreferrer'}
+						>{contact.quickLabel}</a>
+					))}
+				</nav>
 			</header>
 
 			<section class="experience-section" aria-labelledby="experience">
@@ -184,27 +237,42 @@ const contacts = [
 				</div>
 			</section>
 
-			<section aria-labelledby="projects">
-				<h2 id="projects">projects</h2>
-				{projects.map((project) => (
-					<article class="project-item">
-						<div class="project-head">
-							<p class="entry-title">{project.name} <em>- {project.description}</em></p>
-							<div class="project-links">
-								{project.links.map((link) => (
-									<a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
-								))}
+			{portfolioSections.map((portfolioSection) => (
+				<section aria-labelledby={portfolioSection.id}>
+					<h2 id={portfolioSection.id}>{portfolioSection.id}</h2>
+					{portfolioSection.items.map((project) => (
+						<article class="project-item">
+							<div class="project-head">
+								<p class="entry-title">{project.name} <em>- {project.description}</em></p>
+								{project.links.length > 0 && (
+									<div class="project-links">
+										{project.links.map((link) => (
+											<a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+										))}
+									</div>
+								)}
 							</div>
-						</div>
-						{/* <p class="meta">{project.period}</p> */}
-						<ul class="dash-list">
-							{project.bullets.map((bullet) => (
-								<li>{bullet}</li>
-							))}
-						</ul>
-					</article>
+							{/* <p class="meta">{project.period}</p> */}
+							<ul class="dash-list">
+								{project.bullets.map((bullet) => (
+									<li>{bullet}</li>
+								))}
+							</ul>
+						</article>
+					))}
+				</section>
+			))}
 
-				))}
+			<section aria-labelledby="skills">
+				<h2 id="skills">skills</h2>
+				<dl class="skills-list">
+					{skills.map((skillGroup) => (
+						<div class="skills-item">
+							<dt>{skillGroup.category}</dt>
+							<dd>{skillGroup.items.join(' · ')}</dd>
+						</div>
+					))}
+				</dl>
 			</section>
 
 			<section aria-labelledby="contact">
@@ -225,15 +293,38 @@ const contacts = [
 			const themeCount = Number.parseInt(getComputedStyle(root).getPropertyValue('--theme-count'), 10) || 1;
 
 			const setTheme = (index) => {
-				root.dataset.theme = String(((index % themeCount) + themeCount) % themeCount);
+				const theme = String(((index % themeCount) + themeCount) % themeCount);
+				root.dataset.theme = theme;
+
+				try {
+					localStorage.setItem('portfolio-theme', theme);
+				} catch {
+					// Theme cycling still works when browser storage is disabled.
+				}
 			};
 
 			setTheme(Number.parseInt(root.dataset.theme || '0', 10) || 0);
 
-			toggle?.addEventListener('click', () => {
+			const cycleTheme = () => {
 				const currentTheme = Number.parseInt(root.dataset.theme || '0', 10) || 0;
 				setTheme(currentTheme + 1);
-			});
+			};
+
+			if (toggle && 'PointerEvent' in window) {
+				// Pointer events fire without the delayed synthetic click some mobile
+				// browsers produce, while pointercancel prevents accidental changes
+				// when a touch turns into a scroll.
+				toggle.addEventListener('pointerup', (event) => {
+					if (event.isPrimary && event.button === 0) cycleTheme();
+				});
+
+				// Keyboard and assistive-technology activation still arrives as a click.
+				toggle.addEventListener('click', (event) => {
+					if (event.detail === 0) cycleTheme();
+				});
+			} else {
+				toggle?.addEventListener('click', cycleTheme);
+			}
 		</script>
 	</body>
 </html>
