@@ -16,15 +16,15 @@
 }
 
 :root[data-theme="2"] {
-	--accent: #eec03e;
+	--accent: #cea01e;
 }
 
 :root[data-theme="3"] {
-	--accent: #1cc256;
+	--accent: #0cb246;
 }
 
 :root[data-theme="4"] {
-	--accent: #6495ed;
+	--accent: #4465ed;
 }
 
 :root[data-theme="5"] {
@@ -273,6 +273,14 @@ em {
 article > p + p,
 header > p + p {
 	margin-top: 0.45rem;
+}
+
+.intro-links {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: 0.25rem 1rem;
+	margin-top: 0.9rem;
 }
 
 ul {

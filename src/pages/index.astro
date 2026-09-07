@@ -144,12 +144,14 @@ const skills = [
 ];
 
 const contacts = [
-	{ label: 'email', value: '71danielng@gmail.com', href: 'mailto:71danielng@gmail.com' },
-	{ label: 'github', value: 'github.com/ng-daniel', href: 'https://github.com/ng-daniel' },
-	{ label: 'linkedin', value: 'linkedin.com/in/ngdaniel17', href: 'https://www.linkedin.com/in/ngdaniel17/' },
-	{ label: 'itch.io', value: 'fallingdani.itch.io', href: 'https://fallingdani.itch.io/' },
-	{ label: 'resume', value: 'view resume', href: '/daniel_ng_resume.pdf' }
+	{ label: 'email', quickLabel: 'Email', value: '71danielng@gmail.com', href: 'mailto:71danielng@gmail.com' },
+	{ label: 'github', quickLabel: 'GitHub', value: 'github.com/ng-daniel', href: 'https://github.com/ng-daniel' },
+	{ label: 'linkedin', quickLabel: 'LinkedIn', value: 'linkedin.com/in/ngdaniel17', href: 'https://www.linkedin.com/in/ngdaniel17/' },
+	{ label: 'itch.io', quickLabel: null, value: 'fallingdani.itch.io', href: 'https://fallingdani.itch.io/' },
+	{ label: 'resume', quickLabel: 'Resume', value: 'view resume', href: '/daniel_ng_resume.pdf' }
 ];
+
+const quickContacts = contacts.filter((contact) => contact.quickLabel);
 ---
 
 <html lang="en" data-theme="0">
@@ -197,6 +199,15 @@ const contacts = [
 					game jams both solo and with teams, I bring solid fundamentals and creative
 					engineering solutions to any team. 
 				</p>
+				<nav class="intro-links" aria-label="Contact and profile links">
+					{quickContacts.map((contact) => (
+						<a
+							href={contact.href}
+							target={contact.href.startsWith('mailto:') ? undefined : '_blank'}
+							rel={contact.href.startsWith('mailto:') ? undefined : 'noreferrer'}
+						>{contact.quickLabel}</a>
+					))}
+				</nav>
 			</header>
 
 			<section class="experience-section" aria-labelledby="experience">
