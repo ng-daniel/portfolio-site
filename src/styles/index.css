@@ -1,5 +1,5 @@
 :root {
-	--theme-count: 7;
+	--theme-count: 6;
 	--transition-speed: 110ms;
 	--transition-easing: ease;
 	--bg: #eeeeee;
@@ -8,31 +8,27 @@
 }
 
 :root[data-theme="0"] {
-	--accent: #101010;
-}
-
-:root[data-theme="1"] {
 	--accent: #ea6d6d;
 }
 
+:root[data-theme="1"] {
+	--accent: #fda031;
+}
+
 :root[data-theme="2"] {
-	--accent: #eda031;
+	--accent: #eec03e;
 }
 
 :root[data-theme="3"] {
-	--accent: #dfc05e;
-}
-
-:root[data-theme="4"] {
 	--accent: #1cc256;
 }
 
-:root[data-theme="5"] {
+:root[data-theme="4"] {
 	--accent: #6495ed;
 }
 
-:root[data-theme="6"] {
-	--accent: #782a78;
+:root[data-theme="5"] {
+	--accent: #a82a98;
 }
 
 html {
