@@ -156,7 +156,7 @@ const contacts = [
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="/almost-white.png" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta
 			name="description"
@@ -280,10 +280,26 @@ const contacts = [
 
 			setTheme(Number.parseInt(root.dataset.theme || '0', 10) || 0);
 
-			toggle?.addEventListener('click', () => {
+			const cycleTheme = () => {
 				const currentTheme = Number.parseInt(root.dataset.theme || '0', 10) || 0;
 				setTheme(currentTheme + 1);
-			});
+			};
+
+			if (toggle && 'PointerEvent' in window) {
+				// Pointer events fire without the delayed synthetic click some mobile
+				// browsers produce, while pointercancel prevents accidental changes
+				// when a touch turns into a scroll.
+				toggle.addEventListener('pointerup', (event) => {
+					if (event.isPrimary && event.button === 0) cycleTheme();
+				});
+
+				// Keyboard and assistive-technology activation still arrives as a click.
+				toggle.addEventListener('click', (event) => {
+					if (event.detail === 0) cycleTheme();
+				});
+			} else {
+				toggle?.addEventListener('click', cycleTheme);
+			}
 		</script>
 	</body>
 </html>
