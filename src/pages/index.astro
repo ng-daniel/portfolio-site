@@ -128,6 +128,21 @@ const portfolioSections = [
 	{ id: 'games', items: games },
 ];
 
+const skills = [
+	{
+		category: 'languages',
+		items: ['C++', 'C', 'C#', 'GLSL', 'Python', 'SQL', 'Java', 'R', 'HTML/CSS'],
+	},
+	{
+		category: 'frameworks',
+		items: ['OpenGL', 'GLM', 'GLFW', 'FastAPI', 'Streamlit', 'PyTorch', 'NumPy'],
+	},
+	{
+		category: 'tools',
+		items: ['Unity', 'Docker', 'PostgreSQL', 'Git/GitHub', 'GitHub Actions', 'CMake', 'AWS', 'Ollama'],
+	},
+];
+
 const contacts = [
 	{ label: 'email', value: '71danielng@gmail.com', href: 'mailto:71danielng@gmail.com' },
 	{ label: 'github', value: 'github.com/ng-daniel', href: 'https://github.com/ng-daniel' },
@@ -229,6 +244,18 @@ const contacts = [
 					))}
 				</section>
 			))}
+
+			<section aria-labelledby="skills">
+				<h2 id="skills">skills</h2>
+				<dl class="skills-list">
+					{skills.map((skillGroup) => (
+						<div class="skills-item">
+							<dt>{skillGroup.category}</dt>
+							<dd>{skillGroup.items.join(' · ')}</dd>
+						</div>
+					))}
+				</dl>
+			</section>
 
 			<section aria-labelledby="contact">
 				<h2 id="contact">contact</h2>

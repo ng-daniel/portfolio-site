@@ -136,6 +136,29 @@ section {
 	white-space: nowrap;
 }
 
+.skills-list {
+	margin: 0;
+}
+
+.skills-item {
+	display: grid;
+	grid-template-columns: 7rem minmax(0, 1fr);
+	gap: 0.75rem;
+	margin-bottom: 0.45rem;
+}
+
+.skills-item:last-child {
+	margin-bottom: 0;
+}
+
+.skills-item dt {
+	font-weight: 600;
+}
+
+.skills-item dd {
+	margin: 0;
+}
+
 article {
 	margin: 0 0 1.5rem;
 }
@@ -354,5 +377,11 @@ em,
 
 	.project-links {
 		justify-content: flex-start;
+	}
+
+	.skills-item {
+		grid-template-columns: 1fr;
+		gap: 0.1rem;
+		margin-bottom: 0.75rem;
 	}
 }
