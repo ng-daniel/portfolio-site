@@ -171,6 +171,14 @@ const quickContacts = contacts.filter((contact) => contact.quickLabel);
 			rel="stylesheet"
 		/>
 		<title>Daniel Ng</title>
+		<script is:inline>
+			try {
+				const savedTheme = localStorage.getItem('portfolio-theme');
+				if (savedTheme !== null) document.documentElement.dataset.theme = savedTheme;
+			} catch {
+				// The default theme remains available when browser storage is disabled.
+			}
+		</script>
 	</head>
 	<body id="top">
 		<main>
@@ -286,7 +294,14 @@ const quickContacts = contacts.filter((contact) => contact.quickLabel);
 			const themeCount = Number.parseInt(getComputedStyle(root).getPropertyValue('--theme-count'), 10) || 1;
 
 			const setTheme = (index) => {
-				root.dataset.theme = String(((index % themeCount) + themeCount) % themeCount);
+				const theme = String(((index % themeCount) + themeCount) % themeCount);
+				root.dataset.theme = theme;
+
+				try {
+					localStorage.setItem('portfolio-theme', theme);
+				} catch {
+					// Theme cycling still works when browser storage is disabled.
+				}
 			};
 
 			setTheme(Number.parseInt(root.dataset.theme || '0', 10) || 0);
