@@ -35,7 +35,7 @@ const experience = [
 	},
 ];
 
-const projects = [
+const games = [
 	{
 		name: 'Swifter Wet Jet',
 		description: 'Vacuum Cleaner Parkour Speedrunner',
@@ -90,20 +90,42 @@ const projects = [
 			'2D action platformer roguelike built with Purdue ACM SIGGD. Developed 17 enemy types and four boss encounters in Unity while refining enemy architecture as part of a 20+ member team.'
 		],
 	},
+];
+
+const projects = [
 	{
-		name: 'Transform 311',
-		description: 'ELT Data Engineering Pipeline',
+		name: 'Falling Engine',
+		description: 'Data-Oriented Game Engine',
+		links: [
+			{
+				label: 'Github',
+				href: 'https://github.com/ng-daniel/falling-engine',
+			},
+		],
+		period: '2026',
+		bullets: [
+			'Data-oriented C++ game engine with a sparse-set ECS, lazy glTF asset pipeline, and OpenGL renderer. Designed cache-friendly paged storage and GPU resource caching, sustaining 60+ FPS with 36,000+ simulated entities and 32,000+ rendered meshes.',
+		],
+	},
+	{
+		name: 'NYC Service Watch',
+		description: 'Data Engineering & Analytics Pipeline',
 		links: [
 			{
 				label: 'Github',
 				href: 'https://github.com/ng-daniel/nyc311',
 			},
 		],
-		period: 'Mar 2026',
+		period: '2026',
 		bullets: [
-			'End-to-end data pipeline for NYC 311 service request data using Python, Polars, PostgreSQL, dbt, and Docker. Implemented incremental ingestion, medallion architecture, and automated dbt data quality tests for complaint trend analysis, agency performance, and geospatial analytics.'
+			'End-to-end ELT pipeline for NYC service request data using Python, Polars, PostgreSQL, dbt, Streamlit, and Docker. Built incremental ingestion, layered warehouse models, automated data quality tests, pre-aggregated analytics marts, a validation dashboard, and GitHub Actions CI.',
 		],
 	},
+];
+
+const portfolioSections = [
+	{ id: 'projects', items: projects },
+	{ id: 'games', items: games },
 ];
 
 const contacts = [
@@ -182,28 +204,31 @@ const contacts = [
 				</div>
 			</section>
 
-			<section aria-labelledby="projects">
-				<h2 id="projects">projects</h2>
-				{projects.map((project) => (
-					<article class="project-item">
-						<div class="project-head">
-							<p class="entry-title">{project.name} <em>- {project.description}</em></p>
-							<div class="project-links">
-								{project.links.map((link) => (
-									<a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
-								))}
+			{portfolioSections.map((portfolioSection) => (
+				<section aria-labelledby={portfolioSection.id}>
+					<h2 id={portfolioSection.id}>{portfolioSection.id}</h2>
+					{portfolioSection.items.map((project) => (
+						<article class="project-item">
+							<div class="project-head">
+								<p class="entry-title">{project.name} <em>- {project.description}</em></p>
+								{project.links.length > 0 && (
+									<div class="project-links">
+										{project.links.map((link) => (
+											<a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+										))}
+									</div>
+								)}
 							</div>
-						</div>
-						{/* <p class="meta">{project.period}</p> */}
-						<ul class="dash-list">
-							{project.bullets.map((bullet) => (
-								<li>{bullet}</li>
-							))}
-						</ul>
-					</article>
-
-				))}
-			</section>
+							{/* <p class="meta">{project.period}</p> */}
+							<ul class="dash-list">
+								{project.bullets.map((bullet) => (
+									<li>{bullet}</li>
+								))}
+							</ul>
+						</article>
+					))}
+				</section>
+			))}
 
 			<section aria-labelledby="contact">
 				<h2 id="contact">contact</h2>
