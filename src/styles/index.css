@@ -12,7 +12,7 @@
 }
 
 :root[data-theme="1"] {
-	--accent: #fda031;
+	--accent: #ed9021;
 }
 
 :root[data-theme="2"] {
@@ -20,7 +20,7 @@
 }
 
 :root[data-theme="3"] {
-	--accent: #0cb246;
+	--accent: #0ca236;
 }
 
 :root[data-theme="4"] {
