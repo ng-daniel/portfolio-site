@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkGrid from '../../components/WorkGrid.astro';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+
+const filters = [
+	{ label: 'all', kind: 'all' },
+	{ label: 'games', kind: 'game' },
+	{ label: 'projects', kind: 'project' },
+];
+---
+
+<Base title="Work">
+	<section>
+		<div class="links filters" role="group" aria-label="Filter work">
+			{filters.map((filter) => (
+				<button type="button" data-filter={filter.kind} aria-pressed={filter.kind === 'all' ? 'true' : 'false'}>
+					{filter.label}
+				</button>
+			))}
+		</div>
+		<WorkGrid items={work} />
+	</section>
+
+	<script is:inline>
+		const filterButtons = document.querySelectorAll('[data-filter]');
+		const tiles = document.querySelectorAll('[data-kind]');
+
+		filterButtons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const kind = button.dataset.filter;
+
+				filterButtons.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
+				tiles.forEach((tile) => {
+					tile.hidden = kind !== 'all' && tile.dataset.kind !== kind;
+				});
+			});
+		});
+	</script>
+</Base>

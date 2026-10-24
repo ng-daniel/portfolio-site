@@ -1,0 +1,126 @@
+---
+import logo from "../assets/fallingdani-logo-white.png";
+import "../styles/index.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title,
+	description = "Daniel Ng is a game developer and software engineer building systems in Unity, C#, Python, and C++.",
+} = Astro.props;
+
+const navLinks = [
+	{ label: 'home', href: '/' },
+	{ label: 'work', href: '/work' },
+	{ label: 'about', href: '/about' },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : currentPath.startsWith(href));
+---
+
+<html lang="en" data-theme="0">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/almost-white.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{title ? `${title} · Daniel Ng` : 'Daniel Ng'}</title>
+		<script is:inline>
+			try {
+				const savedTheme = localStorage.getItem('portfolio-theme');
+				if (savedTheme !== null) document.documentElement.dataset.theme = savedTheme;
+			} catch {
+				// The default theme remains available when browser storage is disabled.
+			}
+		</script>
+	</head>
+	<body>
+		<main>
+			<header class="site-header">
+				<button
+					class="home-logo"
+					type="button"
+					aria-label="Cycle color theme"
+					data-theme-toggle
+				>
+					<span class="home-logo-mark" style={`--logo-mask: url('${logo.src}')`}></span>
+				</button>
+				<nav class="links" aria-label="Site">
+					{navLinks.map((link) => (
+						<a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>{link.label}</a>
+					))}
+				</nav>
+			</header>
+			<slot />
+		</main>
+		<script is:inline>
+			const root = document.documentElement;
+			const toggle = document.querySelector('[data-theme-toggle]');
+			const themeCount = Number.parseInt(getComputedStyle(root).getPropertyValue('--theme-count'), 10) || 1;
+
+			const setTheme = (index) => {
+				const theme = String(((index % themeCount) + themeCount) % themeCount);
+				root.dataset.theme = theme;
+
+				try {
+					localStorage.setItem('portfolio-theme', theme);
+				} catch {
+					// Theme cycling still works when browser storage is disabled.
+				}
+			};
+
+			setTheme(Number.parseInt(root.dataset.theme || '0', 10) || 0);
+
+			const cycleTheme = () => {
+				const currentTheme = Number.parseInt(root.dataset.theme || '0', 10) || 0;
+				setTheme(currentTheme + 1);
+			};
+
+			if (toggle && 'PointerEvent' in window) {
+				// Pointer events fire without the delayed synthetic click some mobile
+				// browsers produce, while pointercancel prevents accidental changes
+				// when a touch turns into a scroll.
+				toggle.addEventListener('pointerup', (event) => {
+					if (event.isPrimary && event.button === 0) cycleTheme();
+				});
+
+				// Keyboard and assistive-technology activation still arrives as a click.
+				toggle.addEventListener('click', (event) => {
+					if (event.detail === 0) cycleTheme();
+				});
+			} else {
+				toggle?.addEventListener('click', cycleTheme);
+			}
+
+			// Reels only play while on screen, and stay on their poster for
+			// visitors who prefer reduced motion.
+			const reels = document.querySelectorAll('video[data-reel]');
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+			if (reels.length > 0 && 'IntersectionObserver' in window) {
+				const observer = new IntersectionObserver((entries) => {
+					for (const entry of entries) {
+						if (entry.isIntersecting && !reduceMotion.matches) {
+							entry.target.play().catch(() => {});
+						} else {
+							entry.target.pause();
+						}
+					}
+				}, { threshold: 0.25 });
+
+				reels.forEach((reel) => observer.observe(reel));
+			}
+		</script>
+	</body>
+</html>

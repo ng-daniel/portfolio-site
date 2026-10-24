@@ -1,116 +1,10 @@
 ---
-import logo from "../assets/fallingdani-logo-white.png";
-import "../styles/index.css";
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import WorkGrid from '../components/WorkGrid.astro';
 
-const experience = [
-	{
-		role: 'Simulation Programmer',
-		org: 'Envision Center',
-		orgLink: 'https://www.rcac.purdue.edu/envision',
-		period: 'Mar 2026 - Present',
-		current: true,
-		summary: 'Building CollabXR, a mixed-reality classroom, and interactive fluid-dynamics visualizations.',
-	},
-	{
-		role: 'Independent Game Developer',
-		org: 'Fallingdani Games',
-		orgLink: 'https://fallingdani.itch.io/',
-		period: 'Jul 2023 - Present',
-		current: true,
-		summary: 'Shipped 11 Unity/C# games under 48-72 hour game jam deadlines.',
-	},
-	{
-		role: 'Undergraduate Research Software Engineer',
-		org: 'TDM x Caterpillar Inc.',
-		orgLink: 'https://datamine.purdue.edu/caterpillar/',
-		period: 'Aug 2025 - May 2026',
-		current: false,
-		summary: 'Led a 5-person team building an LLM analysis API with FastAPI, AWS Bedrock, and MCP.',
-	},
-];
-
-const games = [
-	{
-		name: 'Swifter Wet Jet',
-		description: 'Vacuum Cleaner Parkour Speedrunner',
-		links: [
-			{
-				label: 'Play on Itch.io',
-				href: 'https://fallingdani.itch.io/swifter-wet-jet',
-			},
-			{
-				label: 'Github',
-				href: 'https://github.com/ng-daniel/ultimateGameJam26',
-			},
-		],
-		period: 'Apr 2026',
-		summary: 'Most Innovative Game, Purdue GDN Ultimate Game Jam 2026.',
-	},
-	{
-		name: 'Echo Chamber',
-		description: 'Copy Cat Bullet Hell',
-		links: [
-			{
-				label: 'Play on Itch.io',
-				href: 'https://fallingdani.itch.io/echo-chamber',
-			},
-			{
-				label: 'Github',
-				href: 'https://github.com/ng-daniel/echoChamber_GMTK25',
-			},
-		],
-		period: 'Aug 2025',
-		summary: 'Top 3% in enjoyment of 9,500+ entries, GMTK Game Jam 2025.',
-	},
-	{
-		name: 'Echoes of Isovios',
-		description: '2D Action Platformer Roguelike',
-		links: [
-			{
-				label: 'Play on Steam',
-				href: 'https://store.steampowered.com/app/4363270/Echoes_of_Isovios_A_Legacy_Undone/',
-			},
-			{
-				label: 'Github',
-				href: 'https://github.com/PurdueSIGGD/SIGGD-Game-2024',
-			},
-		],
-		period: 'Aug 2024 - Jan 2026',
-		summary: 'Released on Steam; built 17 enemies and 4 bosses on a 20+ person team.',
-	},
-];
-
-const projects = [
-	{
-		name: 'Falling Engine',
-		description: 'Data-Oriented Game Engine',
-		links: [
-			{
-				label: 'Github',
-				href: 'https://github.com/ng-daniel/falling-engine',
-			},
-		],
-		period: '2026',
-		summary: 'C++/OpenGL ECS engine sustaining 60+ FPS with 36,000+ entities.',
-	},
-	{
-		name: 'NYC Service Watch',
-		description: 'Data Engineering & Analytics Pipeline',
-		links: [
-			{
-				label: 'Github',
-				href: 'https://github.com/ng-daniel/nyc311',
-			},
-		],
-		period: '2026',
-		summary: 'ELT pipeline and dashboard with Polars, PostgreSQL, dbt, and Streamlit.',
-	},
-];
-
-const portfolioSections = [
-	{ id: 'projects', items: projects },
-	{ id: 'games', items: games },
-];
+const featured = (await getCollection('work', ({ data }) => data.featured))
+	.sort((a, b) => a.data.order - b.data.order);
 
 const contacts = [
 	{ label: 'Email', href: 'mailto:71danielng@gmail.com' },
@@ -121,137 +15,22 @@ const contacts = [
 ];
 ---
 
-<html lang="en" data-theme="0">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/almost-white.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<meta
-			name="description"
-			content="Daniel Ng is a game developer and software engineer building systems in Unity, C#, Python, and C++."
-		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap"
-			rel="stylesheet"
-		/>
-		<title>Daniel Ng</title>
-		<script is:inline>
-			try {
-				const savedTheme = localStorage.getItem('portfolio-theme');
-				if (savedTheme !== null) document.documentElement.dataset.theme = savedTheme;
-			} catch {
-				// The default theme remains available when browser storage is disabled.
-			}
-		</script>
-	</head>
-	<body id="top">
-		<main>
-			<div>
-				<button
-					class="home-logo"
-					type="button"
-					aria-label="Cycle color theme"
-					data-theme-toggle
-				>
-					<span class="home-logo-mark" style={`--logo-mask: url('${logo.src}')`}></span>
-				</button>
-			</div>
-			<br>
-			<header>
-
-				<p>
-					Hi, I'm Daniel Ng, a game developer and software engineer studying CS (Graphics) at Purdue.
-				</p>
-				<nav class="intro-links" aria-label="Contact and profile links">
-					{contacts.map((contact) => (
-						<a
-							href={contact.href}
-							target={contact.href.startsWith('mailto:') ? undefined : '_blank'}
-							rel={contact.href.startsWith('mailto:') ? undefined : 'noreferrer'}
-						>{contact.label}</a>
-					))}
-				</nav>
-			</header>
-
-			<section class="experience-section" aria-labelledby="experience">
-				<h2 id="experience">experience</h2>
-				<div class="experience-list">
-					{experience.map((item) => (
-						<article class:list={["experience-item", { current: item.current }]}>
-							<div class="timeline-marker" aria-hidden="true"></div>
-							<div class="experience-copy">
-								<p class="meta">{item.period}</p>
-								<p class="entry-title">{item.role} <a href={item.orgLink} target="_blank" rel="noreferrer">@ {item.org}</a></p>
-								<p class="summary">{item.summary}</p>
-							</div>
-						</article>
-					))}
-				</div>
-			</section>
-
-			{portfolioSections.map((portfolioSection) => (
-				<section aria-labelledby={portfolioSection.id}>
-					<h2 id={portfolioSection.id}>{portfolioSection.id}</h2>
-					{portfolioSection.items.map((project) => (
-						<article class="project-item">
-							<div class="project-head">
-								<p class="entry-title">{project.name} <em>- {project.description}</em></p>
-								{project.links.length > 0 && (
-									<div class="project-links">
-										{project.links.map((link) => (
-											<a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
-										))}
-									</div>
-								)}
-							</div>
-							{/* <p class="meta">{project.period}</p> */}
-							<p class="summary">{project.summary}</p>
-						</article>
-					))}
-				</section>
+<Base>
+	<section>
+		<p>Hi, I'm Daniel Ng, a game developer and software engineer studying CS (Graphics) at Purdue.</p>
+		<nav class="links" aria-label="Contact and profile links">
+			{contacts.map((contact) => (
+				<a
+					href={contact.href}
+					target={contact.href.startsWith('mailto:') ? undefined : '_blank'}
+					rel={contact.href.startsWith('mailto:') ? undefined : 'noreferrer'}
+				>{contact.label}</a>
 			))}
-		</main>
-		<script is:inline>
-			const root = document.documentElement;
-			const toggle = document.querySelector('[data-theme-toggle]');
-			const themeCount = Number.parseInt(getComputedStyle(root).getPropertyValue('--theme-count'), 10) || 1;
+		</nav>
+	</section>
 
-			const setTheme = (index) => {
-				const theme = String(((index % themeCount) + themeCount) % themeCount);
-				root.dataset.theme = theme;
-
-				try {
-					localStorage.setItem('portfolio-theme', theme);
-				} catch {
-					// Theme cycling still works when browser storage is disabled.
-				}
-			};
-
-			setTheme(Number.parseInt(root.dataset.theme || '0', 10) || 0);
-
-			const cycleTheme = () => {
-				const currentTheme = Number.parseInt(root.dataset.theme || '0', 10) || 0;
-				setTheme(currentTheme + 1);
-			};
-
-			if (toggle && 'PointerEvent' in window) {
-				// Pointer events fire without the delayed synthetic click some mobile
-				// browsers produce, while pointercancel prevents accidental changes
-				// when a touch turns into a scroll.
-				toggle.addEventListener('pointerup', (event) => {
-					if (event.isPrimary && event.button === 0) cycleTheme();
-				});
-
-				// Keyboard and assistive-technology activation still arrives as a click.
-				toggle.addEventListener('click', (event) => {
-					if (event.detail === 0) cycleTheme();
-				});
-			} else {
-				toggle?.addEventListener('click', cycleTheme);
-			}
-		</script>
-	</body>
-</html>
+	<section>
+		<WorkGrid items={featured} />
+		<p class="more"><a href="/work">all work →</a></p>
+	</section>
+</Base>
