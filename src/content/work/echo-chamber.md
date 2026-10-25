@@ -2,8 +2,8 @@
 title: "Echo Chamber"
 kind: game
 description: "Copy Cat Bullet Hell"
-summary: "Top 3% in enjoyment of 9,500+ entries, GMTK Game Jam 2025."
-period: "Aug 2025"
+summary: "Placed 322nd out of 9,500+ entries in GMTK Game Jam 2025."
+period: "August 2025"
 reel: /media/echoChamber.mp4
 poster: /media/echoChamber.jpg
 links:

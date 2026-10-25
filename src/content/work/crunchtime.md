@@ -1,9 +1,9 @@
 ---
 title: "CRUNCHTIME"
 kind: game
-description: "Arcade Survival"
-summary: "Keep the clock running in a field that gets harder with every mistake."
-period: "Jan 2025"
+description: "Panic-like Spot the Difference"
+summary: "Keep the clock alive in a grassy field that gets more cluttered with every mistake."
+period: "January 2025"
 reel: /media/crunchtime.mp4
 poster: /media/crunchtime.jpg
 links:

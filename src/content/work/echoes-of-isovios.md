@@ -2,8 +2,8 @@
 title: "Echoes of Isovios"
 kind: game
 description: "2D Action Platformer Roguelike"
-summary: "Released on Steam; built 17 enemies and 4 bosses on a 20+ person team."
-period: "Aug 2024 - Jan 2026"
+summary: "Built 17 enemies and 4 bosses on a 20+ person team as part of Purdue SIGGD, a collaborative game dev club."
+period: "2024 - 2026"
 reel: /media/isovios.mp4
 poster: /media/isovios.jpg
 links:
