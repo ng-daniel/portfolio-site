@@ -2,10 +2,15 @@
 	--transition-speed: 110ms;
 	--transition-easing: ease;
 	color-scheme: dark;
-	--bg: #141414;
-	--main: #e6e6e6;
+	/* --bg: #141414; */
+	/* --main: #e6e6e6; */
+	--bg: #121216;
+	--main: #e8e6e1;
 	--muted: #8a8a8a;
-	--accent: #86dfa3;
+	/* --accent: #86dfa3; */
+	/* --accent: #83b07e; */
+	--accent: #a692b0;
+
 }
 
 html {
