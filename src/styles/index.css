@@ -126,6 +126,12 @@ a[aria-current="page"] {
 	transform: translateY(0.2rem);
 }
 
+/* Footer: contact links on every page except home, which has them up top */
+
+.site-footer {
+	margin-top: 3.5rem;
+}
+
 /* Inline link rows: nav, contacts, project links, filters */
 
 .links {

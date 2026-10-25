@@ -2,17 +2,10 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import WorkGrid from '../components/WorkGrid.astro';
+import ContactLinks from '../components/ContactLinks.astro';
 
 const featured = (await getCollection('work', ({ data }) => data.featured))
 	.sort((a, b) => a.data.order - b.data.order);
-
-const contacts = [
-	{ label: 'Email', href: 'mailto:71danielng@gmail.com' },
-	{ label: 'GitHub', href: 'https://github.com/ng-daniel' },
-	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/ngdaniel17/' },
-	{ label: 'itch.io', href: 'https://fallingdani.itch.io/' },
-	{ label: 'Resume', href: '/daniel_ng_resume.pdf' }
-];
 ---
 
 <Base>
@@ -21,15 +14,7 @@ const contacts = [
 			Welcome to my site! I'm a game dev and software engineer studying CS at Purdue University
 			with an interest in graphics, systems, and software. My favorite fruits are apples!
 		</p>
-		<nav class="links" aria-label="Contact and profile links">
-			{contacts.map((contact) => (
-				<a
-					href={contact.href}
-					target={contact.href.startsWith('mailto:') ? undefined : '_blank'}
-					rel={contact.href.startsWith('mailto:') ? undefined : 'noreferrer'}
-				>{contact.label}</a>
-			))}
-		</nav>
+		<ContactLinks />
 	</section>
 
 	<section>

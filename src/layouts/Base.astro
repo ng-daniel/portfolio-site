@@ -1,5 +1,6 @@
 ---
 import logo from "../assets/fallingdani-logo-white.png";
+import ContactLinks from "../components/ContactLinks.astro";
 import "../styles/index.css";
 
 interface Props {
@@ -51,6 +52,11 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 				</nav>
 			</header>
 			<slot />
+			{currentPath !== '/' && (
+				<footer class="site-footer">
+					<ContactLinks />
+				</footer>
+			)}
 		</main>
 		<script is:inline>
 			// Reels only play while on screen, and stay on their poster for

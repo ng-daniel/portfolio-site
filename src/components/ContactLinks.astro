@@ -1,0 +1,19 @@
+---
+const contacts = [
+	{ label: 'Email', href: 'mailto:71danielng@gmail.com' },
+	{ label: 'GitHub', href: 'https://github.com/ng-daniel' },
+	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/ngdaniel17/' },
+	{ label: 'itch.io', href: 'https://fallingdani.itch.io/' },
+	{ label: 'Resume', href: '/daniel_ng_resume.pdf' }
+];
+---
+
+<nav class="links" aria-label="Contact and profile links">
+	{contacts.map((contact) => (
+		<a
+			href={contact.href}
+			target={contact.href.startsWith('mailto:') ? undefined : '_blank'}
+			rel={contact.href.startsWith('mailto:') ? undefined : 'noreferrer'}
+		>{contact.label}</a>
+	))}
+</nav>
