@@ -11,10 +11,11 @@ import { stats, experience, education } from '../data/about';
 			I bring a wide range of experiences across tech, from Unity games
 			to high-performance C++ systems and python backends for LLM web apps.
 		</p>
-		<ul class="stats">
-			{stats.map((stat) => <li>{stat}</li>)}
-			<li><a href="/daniel_ng_resume.pdf" target="_blank" rel="noreferrer">Resume</a></li>
-		</ul>
+		{stats.length > 0 && (
+			<ul class="stats">
+				{stats.map((stat) => <li>{stat}</li>)}
+			</ul>
+		)}
 	</section>
 
 	<section aria-labelledby="education">

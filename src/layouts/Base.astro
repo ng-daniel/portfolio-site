@@ -60,11 +60,28 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 		</main>
 		<script is:inline>
 			// Reels only play while on screen, and stay on their poster for
-			// visitors who prefer reduced motion.
-			const reels = document.querySelectorAll('video[data-reel]');
+			// visitors who prefer reduced motion. On devices with a mouse, grid
+			// tiles wait for hover or keyboard focus instead.
+			const reels = Array.from(document.querySelectorAll('video[data-reel]'));
 			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+			const canHover = window.matchMedia('(hover: hover)').matches;
+			const hoverReels = canHover ? reels.filter((reel) => reel.closest('.tile')) : [];
+			const scrollReels = reels.filter((reel) => !hoverReels.includes(reel));
 
-			if (reels.length > 0 && 'IntersectionObserver' in window) {
+			hoverReels.forEach((reel) => {
+				const tile = reel.closest('.tile');
+				const play = () => {
+					if (!reduceMotion.matches) reel.play().catch(() => {});
+				};
+				const pause = () => reel.pause();
+
+				tile.addEventListener('mouseenter', play);
+				tile.addEventListener('mouseleave', pause);
+				tile.addEventListener('focus', play);
+				tile.addEventListener('blur', pause);
+			});
+
+			if (scrollReels.length > 0 && 'IntersectionObserver' in window) {
 				const observer = new IntersectionObserver((entries) => {
 					for (const entry of entries) {
 						if (entry.isIntersecting && !reduceMotion.matches) {
@@ -75,7 +92,7 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 					}
 				}, { threshold: 0.25 });
 
-				reels.forEach((reel) => observer.observe(reel));
+				scrollReels.forEach((reel) => observer.observe(reel));
 			}
 		</script>
 	</body>

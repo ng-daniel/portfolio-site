@@ -3,9 +3,10 @@ interface Props {
 	src: string;
 	poster?: string;
 	alt?: string;
+	preload?: 'none' | 'metadata' | 'auto';
 }
 
-const { src, poster, alt = '' } = Astro.props;
+const { src, poster, alt = '', preload = 'none' } = Astro.props;
 const isVideo = /\.(mp4|webm)$/i.test(src);
 ---
 
@@ -17,7 +18,7 @@ const isVideo = /\.(mp4|webm)$/i.test(src);
 		muted
 		loop
 		playsinline
-		preload="none"
+		preload={preload}
 		aria-hidden="true"
 		data-reel
 	></video>
