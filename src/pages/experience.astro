@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import TimelineEntry from '../components/TimelineEntry.astro';
+import Skills from '../components/Skills.astro';
+import { stats, experience, education } from '../data/about';
+---
+
+<Base title="Experience">
+	<section>
+		<p>
+			Game developer and software engineer based in NY, working across graphics, game systems, and data
+			pipelines. Studying CS and Data Science at Purdue University.
+		</p>
+		<ul class="stats">
+			{stats.map((stat) => <li>{stat}</li>)}
+			<li><a href="/daniel_ng_resume.pdf" target="_blank" rel="noreferrer">Resume</a></li>
+		</ul>
+	</section>
+
+	<section aria-labelledby="education">
+		<h2 id="education">education</h2>
+		<div class="entry">
+			<p class="entry-title"><a href={education.schoolLink} target="_blank" rel="noreferrer">{education.school}</a> <em>- {education.degree}</em></p>
+			<p class="meta">{[education.period, ...education.details].join(' · ')}</p>
+			<ul class="tags" aria-label="Relevant coursework">
+				{education.coursework.map((course) => <li>{course}</li>)}
+			</ul>
+		</div>
+	</section>
+
+	<section aria-labelledby="experience">
+		<h2 id="experience">experience</h2>
+		<div class="experience-list">
+			{experience.map((item) => <TimelineEntry item={item} />)}
+		</div>
+	</section>
+
+	<section aria-labelledby="skills">
+		<h2 id="skills">skills</h2>
+		<Skills />
+	</section>
+</Base>

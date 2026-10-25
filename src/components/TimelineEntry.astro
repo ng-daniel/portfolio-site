@@ -1,0 +1,30 @@
+---
+import type { Experience } from '../data/about';
+
+interface Props {
+	item: Experience;
+}
+
+const { item } = Astro.props;
+---
+
+<article class:list={["experience-item", { current: item.current }]}>
+	<div class="timeline-marker" aria-hidden="true"></div>
+	<div class="entry">
+		<p class="entry-title">{item.role} <a href={item.orgLink} target="_blank" rel="noreferrer">@ {item.org}</a></p>
+		<p class="meta">{item.period}</p>
+		<ul class="highlights">
+			{item.highlights.map((highlight) => <li>{highlight}</li>)}
+		</ul>
+		<ul class="tags" aria-label="Tools used">
+			{item.tags.map((tag) => <li>{tag}</li>)}
+		</ul>
+		{item.related && (
+			<p class="related meta">
+				related: {item.related.map((link, i) => (
+					<>{i > 0 && ', '}<a href={link.href}>{link.label}</a></>
+				))} →
+			</p>
+		)}
+	</div>
+</article>
