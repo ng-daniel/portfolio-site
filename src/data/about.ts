@@ -44,7 +44,10 @@ export const experience: Experience[] = [
 		org: 'TDM x Caterpillar Inc.',
 		orgLink: 'https://datamine.purdue.edu/caterpillar/',
 		period: 'Aug 2025 - May 2026',
-		highlights: ['Led a 5-person team building the backend for an AI data analysis platform using Python, FastAPI, MCP, and AWS Bedrock.'],
+		highlights: [
+			'Led a 5-person team to build an LLM-powered data analytics platform',
+			'Ran weekly demos and coordinated with Caterpillar staff across biweekly sprints'
+		],
 	},
 ];
 
