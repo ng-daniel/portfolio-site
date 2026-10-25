@@ -4,8 +4,6 @@ kind: game
 description: "Bubble Platformer"
 summary: "Guide a fragile bubble upward with a leafblower. Global Game Jam 2025."
 period: "Jan 2025"
-order: 9
-featured: false
 reel: /media/takecare.mp4
 poster: /media/takecare.jpg
 links:

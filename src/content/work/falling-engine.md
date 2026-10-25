@@ -4,8 +4,6 @@ kind: project
 description: "Data-Oriented Game Engine"
 summary: "C++/OpenGL ECS engine sustaining 60+ FPS with 36,000+ entities."
 period: "2026"
-order: 1
-featured: true
 reel: /isovios.mp4
 poster: /almost-white.png
 gallery:

@@ -4,8 +4,6 @@ kind: game
 description: "Snake Bullet Hell"
 summary: "Classic snake meets bullet hell, with wormhole teleportation."
 period: "May 2024"
-order: 13
-featured: false
 reel: /media/wyrmhole.mp4
 poster: /media/wyrmhole.jpg
 links:

@@ -4,8 +4,6 @@ kind: game
 description: "Low-Res Biplane Shooter"
 summary: "A biplane shooter frenzy against an alien fleet. LOWREZJAM 2023."
 period: "Aug 2023"
-order: 16
-featured: false
 reel: /media/spitfire.mp4
 poster: /media/spitfire.jpg
 links:

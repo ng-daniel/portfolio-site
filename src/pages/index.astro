@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import WorkGrid from '../components/WorkGrid.astro';
 import ContactLinks from '../components/ContactLinks.astro';
+import { getWork } from '../data/work';
+import { home } from '../data/order';
 
-const featured = (await getCollection('work', ({ data }) => data.featured))
-	.sort((a, b) => a.data.order - b.data.order);
+const featured = await getWork(home);
 ---
 
 <Base>

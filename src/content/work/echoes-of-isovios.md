@@ -4,8 +4,6 @@ kind: game
 description: "2D Action Platformer Roguelike"
 summary: "Released on Steam; built 17 enemies and 4 bosses on a 20+ person team."
 period: "Aug 2024 - Jan 2026"
-order: 4
-featured: true
 reel: /media/isovios.mp4
 poster: /media/isovios.jpg
 links:

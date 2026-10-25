@@ -1,9 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import WorkGrid from '../../components/WorkGrid.astro';
+import { getWork } from '../../data/work';
+import { work } from '../../data/order';
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const items = await getWork(work);
 
 const filters = [
 	{ label: 'all', kind: 'all' },
@@ -21,7 +22,7 @@ const filters = [
 				</button>
 			))}
 		</div>
-		<WorkGrid items={work} />
+		<WorkGrid items={items} />
 	</section>
 
 	<script is:inline>

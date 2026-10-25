@@ -10,9 +10,6 @@ const work = defineCollection({
 		description: z.string(),
 		summary: z.string(),
 		period: z.string(),
-		// Lower numbers are listed first.
-		order: z.number(),
-		featured: z.boolean().default(false),
 		// Paths under public/. Gallery entries ending in .mp4 or .webm render as reels.
 		reel: z.string(),
 		poster: z.string(),

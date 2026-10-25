@@ -4,8 +4,6 @@ kind: game
 description: "1-Bit Puzzle Platformer"
 summary: "Box puzzles at the end of the world. 1-BIT JAM #2."
 period: "Nov 2023"
-order: 14
-featured: false
 reel: /media/sospito.mp4
 poster: /media/sospito.jpg
 links:

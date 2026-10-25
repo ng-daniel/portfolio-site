@@ -4,8 +4,6 @@ kind: game
 description: "Vacuum Cleaner Parkour Speedrunner"
 summary: "Most Innovative Game, Purdue GDN Ultimate Game Jam 2026."
 period: "Apr 2026"
-order: 2
-featured: true
 reel: /media/swifter.mp4
 poster: /media/swifter.jpg
 links:
