@@ -17,6 +17,7 @@ const { Content } = await render(item);
 ---
 
 <Base title={item.data.title} description={item.data.summary}>
+	<p class="back"><a href="/work" data-back>← all work</a></p>
 	<article>
 		<Reel src={item.data.reel} poster={item.data.poster} alt={item.data.title} />
 		<h1>{item.data.title} <em>- {item.data.description}</em></h1>
@@ -40,4 +41,19 @@ const { Content } = await render(item);
 			</ul>
 		)}
 	</article>
+
+	<script is:inline>
+		// Coming from /work, going back through history restores its scroll
+		// position and filter. Otherwise the link just opens /work.
+		document.querySelector('[data-back]').addEventListener('click', (event) => {
+			if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+			if (!document.referrer) return;
+
+			const referrer = new URL(document.referrer);
+			if (referrer.origin === location.origin && referrer.pathname.replace(/\/$/, '') === '/work') {
+				event.preventDefault();
+				history.back();
+			}
+		});
+	</script>
 </Base>

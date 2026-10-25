@@ -213,6 +213,10 @@ a[aria-current="page"] {
 
 /* Work detail */
 
+.back {
+	margin-bottom: 1.25rem;
+}
+
 article > .reel {
 	margin-bottom: 1.25rem;
 }
