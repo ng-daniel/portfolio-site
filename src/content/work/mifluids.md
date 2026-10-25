@@ -6,6 +6,6 @@ summary: "Unity/C# systems for a virtual fluid dynamics lab used by 400+ student
 period: "2026"
 order: 6
 featured: false
-reel: /almost-white.png
-poster: /almost-white.png
+reel: /media/mifluids.mp4
+poster: /media/mifluids.jpg
 ---

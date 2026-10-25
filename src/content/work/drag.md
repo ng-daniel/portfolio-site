@@ -6,8 +6,8 @@ summary: "Aerial dogfights with a wrecking ball chained to your plane. Purdue SI
 period: "TBD"
 order: 11
 featured: false
-reel: /almost-white.png
-poster: /almost-white.png
+reel: /media/drag.mp4
+poster: /media/drag.jpg
 links:
   - label: "Play on itch.io"
     href: https://fallingdani.itch.io/drag
