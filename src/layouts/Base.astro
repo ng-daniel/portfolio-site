@@ -22,7 +22,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : currentPath.startsWith(href));
 ---
 
-<html lang="en" data-theme="0">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="/almost-white.png" />
@@ -36,26 +36,14 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 			rel="stylesheet"
 		/>
 		<title>{title ? `${title} · Daniel Ng` : 'Daniel Ng'}</title>
-		<script is:inline>
-			try {
-				const savedTheme = localStorage.getItem('portfolio-theme');
-				if (savedTheme !== null) document.documentElement.dataset.theme = savedTheme;
-			} catch {
-				// The default theme remains available when browser storage is disabled.
-			}
-		</script>
 	</head>
 	<body>
 		<main>
 			<header class="site-header">
-				<button
-					class="home-logo"
-					type="button"
-					aria-label="Cycle color theme"
-					data-theme-toggle
-				>
+				<a class="home-logo" href="/" aria-label="Daniel Ng, home">
 					<span class="home-logo-mark" style={`--logo-mask: url('${logo.src}')`}></span>
-				</button>
+					<span class="home-logo-name">daniel ng</span>
+				</a>
 				<nav class="links" aria-label="Site">
 					{navLinks.map((link) => (
 						<a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>{link.label}</a>
@@ -65,44 +53,6 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 			<slot />
 		</main>
 		<script is:inline>
-			const root = document.documentElement;
-			const toggle = document.querySelector('[data-theme-toggle]');
-			const themeCount = Number.parseInt(getComputedStyle(root).getPropertyValue('--theme-count'), 10) || 1;
-
-			const setTheme = (index) => {
-				const theme = String(((index % themeCount) + themeCount) % themeCount);
-				root.dataset.theme = theme;
-
-				try {
-					localStorage.setItem('portfolio-theme', theme);
-				} catch {
-					// Theme cycling still works when browser storage is disabled.
-				}
-			};
-
-			setTheme(Number.parseInt(root.dataset.theme || '0', 10) || 0);
-
-			const cycleTheme = () => {
-				const currentTheme = Number.parseInt(root.dataset.theme || '0', 10) || 0;
-				setTheme(currentTheme + 1);
-			};
-
-			if (toggle && 'PointerEvent' in window) {
-				// Pointer events fire without the delayed synthetic click some mobile
-				// browsers produce, while pointercancel prevents accidental changes
-				// when a touch turns into a scroll.
-				toggle.addEventListener('pointerup', (event) => {
-					if (event.isPrimary && event.button === 0) cycleTheme();
-				});
-
-				// Keyboard and assistive-technology activation still arrives as a click.
-				toggle.addEventListener('click', (event) => {
-					if (event.detail === 0) cycleTheme();
-				});
-			} else {
-				toggle?.addEventListener('click', cycleTheme);
-			}
-
 			// Reels only play while on screen, and stay on their poster for
 			// visitors who prefer reduced motion.
 			const reels = document.querySelectorAll('video[data-reel]');

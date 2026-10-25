@@ -1,36 +1,11 @@
 :root {
-	--theme-count: 6;
 	--transition-speed: 110ms;
 	--transition-easing: ease;
 	color-scheme: dark;
 	--bg: #141414;
 	--main: #e6e6e6;
 	--muted: #8a8a8a;
-	--accent: #e6e6e6;
-}
-
-:root[data-theme="0"] {
-	--accent: #f4a5a5;
-}
-
-:root[data-theme="1"] {
-	--accent: #fec58a;
-}
-
-:root[data-theme="2"] {
-	--accent: #ecd27e;
-}
-
-:root[data-theme="3"] {
 	--accent: #86dfa3;
-}
-
-:root[data-theme="4"] {
-	--accent: #a3b5f7;
-}
-
-:root[data-theme="5"] {
-	--accent: #dba6d2;
 }
 
 html {
@@ -115,11 +90,9 @@ a[aria-current="page"] {
 }
 
 .home-logo {
-	appearance: none;
-	background: none;
-	border: 0;
-	padding: 0;
-	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
 	touch-action: manipulation;
 	-webkit-tap-highlight-color: transparent;
 	user-select: none;
@@ -133,6 +106,16 @@ a[aria-current="page"] {
 	background: var(--accent);
 	mask: var(--logo-mask) center / contain no-repeat;
 	-webkit-mask: var(--logo-mask) center / contain no-repeat;
+}
+
+.home-logo-name {
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.home-logo:hover,
+.home-logo:focus-visible {
+	text-decoration: none;
 }
 
 .home-logo:focus-visible {
