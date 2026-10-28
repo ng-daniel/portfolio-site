@@ -2,7 +2,7 @@
 
 export const home = [
 	'falling-engine',
-	'swifter-wet-jet',
+	'collabxr',
 	'echo-chamber',
 	'echoes-of-isovios',
 ];
