@@ -7,10 +7,6 @@ import { stats, experience, education } from '../data/about';
 
 <Base title="Experience">
 	<section>
-		<p>
-			I bring technical depth to a handful of fields across tech, from Unity games
-			to efficient C++ systems and python backends for LLM web apps.
-		</p>
 		{stats.length > 0 && (
 			<ul class="stats">
 				{stats.map((stat) => <li>{stat}</li>)}
