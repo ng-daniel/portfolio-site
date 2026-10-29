@@ -16,9 +16,11 @@ out_dir="public/media"
 mkdir -p "$out_dir"
 
 # 720p H.264 with no audio track; faststart lets playback begin before the file finishes downloading.
+# CRF sets quality, and maxrate/bufsize cap busy footage (dense particles, crowds) at about 3 Mbps
+# so a single reel can't balloon to tens of megabytes.
 ffmpeg -y -ss "$start" -t "$duration" -i "$input" \
 	-vf "scale=-2:720,fps=30" -an \
-	-c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart \
+	-c:v libx264 -preset slow -crf 28 -maxrate 3M -bufsize 6M -pix_fmt yuv420p -movflags +faststart \
 	"$out_dir/$name.mp4"
 
 ffmpeg -y -ss "$start" -i "$input" -frames:v 1 -vf "scale=-2:720" -q:v 3 "$out_dir/$name.jpg"
