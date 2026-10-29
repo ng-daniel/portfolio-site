@@ -1,0 +1,27 @@
+---
+interface Props {
+	src: string;
+	poster?: string;
+	alt?: string;
+	preload?: 'none' | 'metadata' | 'auto';
+}
+
+const { src, poster, alt = '', preload = 'none' } = Astro.props;
+const isVideo = /\.(mp4|webm)$/i.test(src);
+---
+
+{isVideo ? (
+	<video
+		class="reel"
+		src={src}
+		poster={poster}
+		muted
+		loop
+		playsinline
+		preload={preload}
+		aria-hidden="true"
+		data-reel
+	></video>
+) : (
+	<img class="reel" src={src} alt={alt} loading="lazy" decoding="async" />
+)}

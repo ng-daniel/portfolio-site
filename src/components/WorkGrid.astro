@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Reel from './Reel.astro';
+
+interface Props {
+	items: CollectionEntry<'work'>[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="grid">
+	{items.map((item) => (
+		<li data-kind={item.data.kind}>
+			<a class="tile" href={`/work/${item.id}`}>
+				<Reel src={item.data.reel} poster={item.data.poster} alt={item.data.title} preload="none" />
+				<span class="tile-caption">
+					<span>{item.data.title}</span>
+					<span class="meta">{item.data.kind}</span>
+				</span>
+			</a>
+		</li>
+	))}
+</ul>

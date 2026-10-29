@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import ExperienceEntry from '../components/ExperienceEntry.astro';
+import Skills from '../components/Skills.astro';
+import { stats, experience, education } from '../data/about';
+---
+
+<Base title="Experience">
+	<section>
+		{stats.length > 0 && (
+			<ul class="stats">
+				{stats.map((stat) => <li>{stat}</li>)}
+			</ul>
+		)}
+	</section>
+
+	<section aria-labelledby="education">
+		<h2 id="education">education</h2>
+		<div class="entry">
+			<p class="entry-title"><a href={education.schoolLink} target="_blank" rel="noreferrer">{education.school}</a> <em>- {education.degree}</em></p>
+			<p class="meta">{[education.period, ...education.details].join(', ')}</p>
+			<ul class="tags" aria-label="Relevant coursework">
+				{education.coursework.map((course) => <li>{course}</li>)}
+			</ul>
+		</div>
+	</section>
+
+	<section aria-labelledby="experience">
+		<h2 id="experience">experience</h2>
+		<div class="experience-list">
+			{experience.map((item) => <ExperienceEntry item={item} />)}
+		</div>
+	</section>
+
+	<section aria-labelledby="skills">
+		<h2 id="skills">skills</h2>
+		<Skills />
+	</section>
+</Base>

@@ -1,0 +1,99 @@
+---
+import logo from "../assets/fallingdani-logo-white.png";
+import ContactLinks from "../components/ContactLinks.astro";
+import "../styles/index.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title,
+	description = "Daniel Ng is a game developer and software engineer building systems in Unity, C#, Python, and C++.",
+} = Astro.props;
+
+const navLinks = [
+	{ label: 'home', href: '/' },
+	{ label: 'work', href: '/work' },
+	{ label: 'experience', href: '/experience' },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : currentPath.startsWith(href));
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/almost-white.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{title ? `${title} · Daniel Ng` : 'Daniel Ng'}</title>
+	</head>
+	<body>
+		<main>
+			<header class="site-header">
+				<a class="home-logo" href="/" aria-label="Daniel Ng, home">
+					<span class="home-logo-mark" style={`--logo-mask: url('${logo.src}')`}></span>
+					<span class="home-logo-name">daniel ng</span>
+				</a>
+				<nav class="links" aria-label="Site">
+					{navLinks.map((link) => (
+						<a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>{link.label}</a>
+					))}
+				</nav>
+			</header>
+			<slot />
+			{currentPath !== '/' && (
+				<footer class="site-footer">
+					<ContactLinks />
+				</footer>
+			)}
+		</main>
+		<script is:inline>
+			// Reels only play while on screen, and stay on their poster for
+			// visitors who prefer reduced motion. On devices with a mouse, grid
+			// tiles wait for hover or keyboard focus instead.
+			const reels = Array.from(document.querySelectorAll('video[data-reel]'));
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+			const canHover = window.matchMedia('(hover: hover)').matches;
+			const hoverReels = canHover ? reels.filter((reel) => reel.closest('.tile')) : [];
+			const scrollReels = reels.filter((reel) => !hoverReels.includes(reel));
+
+			hoverReels.forEach((reel) => {
+				const tile = reel.closest('.tile');
+				const play = () => {
+					if (!reduceMotion.matches) reel.play().catch(() => {});
+				};
+				const pause = () => reel.pause();
+
+				tile.addEventListener('mouseenter', play);
+				tile.addEventListener('mouseleave', pause);
+				tile.addEventListener('focus', play);
+				tile.addEventListener('blur', pause);
+			});
+
+			if (scrollReels.length > 0 && 'IntersectionObserver' in window) {
+				const observer = new IntersectionObserver((entries) => {
+					for (const entry of entries) {
+						if (entry.isIntersecting && !reduceMotion.matches) {
+							entry.target.play().catch(() => {});
+						} else {
+							entry.target.pause();
+						}
+					}
+				}, { threshold: 0.25 });
+
+				scrollReels.forEach((reel) => observer.observe(reel));
+			}
+		</script>
+	</body>
+</html>

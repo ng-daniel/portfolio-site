@@ -1,0 +1,12 @@
+---
+import { skills } from '../data/about';
+---
+
+<dl class="skills">
+	{skills.map((skill) => (
+		<>
+			<dt>{skill.group}</dt>
+			<dd>{skill.items.join(', ')}</dd>
+		</>
+	))}
+</dl>
