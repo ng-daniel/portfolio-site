@@ -11,9 +11,7 @@ links:
     href: https://github.com/ng-daniel/falling-engine
 ---
 
-Yes, I'm making my own engine. No, it's not just a toy project. I'm actually going to make stuff with this.
-
-Right now, it has a decent amount of features, like GLFT models, ECS, scripting, OpenGL rendering. However, it still needs a few things before I can start making games:
+Right now, Falling Engine has a decent amount of features, like GLFT models, ECS, scripting, OpenGL rendering. However, it still needs a few things before I can start making games:
 1. physics (currently in-progress!)
 2. UI
 3. scene management

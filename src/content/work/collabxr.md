@@ -6,6 +6,11 @@ summary: "Maintainer and Developer."
 period: "2026"
 reel: /media/collabxr.mp4
 poster: /media/collabxr.jpg
+links:
+  - label: "Website"
+    href: https://envision.center/collabxr
+  - label: "GitHub"
+    href: https://github.com/Envision-Center/CollabXR
 ---
 
 CollabXR is one of the projects I am working on as part of my part-time work
