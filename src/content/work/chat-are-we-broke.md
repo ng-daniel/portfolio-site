@@ -10,3 +10,11 @@ links:
   - label: "Play on itch.io"
     href: https://privnoval016.itch.io/chat-are-we-broke
 ---
+
+This was my second GMTK game jam, and the largest team I've worked in for a game jam.
+We ended up placing ~500th in the creativity category, which out of 10,000+ entries is
+a great showing.
+
+My main feature contributions were the infinite procedural generation of the store and the
+customer spawning system (uses object pooling!). I also drew all the
+character assets, and composed all the music.

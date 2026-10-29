@@ -2,7 +2,7 @@
 title: "Drag"
 kind: game
 description: "Wrecking Ball Dogfighter"
-summary: "Aerial dogfights with a wrecking ball chained to your plane. Purdue SIGGD New Scene Jam."
+summary: "Aerial dogfights chained to a wrecking ball. Purdue SIGGD New Scene Jam."
 period: "September 2024"
 reel: /media/drag.mp4
 poster: /media/drag.jpg

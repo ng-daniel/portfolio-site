@@ -69,6 +69,7 @@ section {
 
 .summary {
 	margin-top: 0.45rem;
+	color: var(--muted);
 }
 
 a {
@@ -228,6 +229,32 @@ article > .grid {
 .body:not(:empty) {
 	margin-top: 1.25rem;
 	max-width: 40rem;
+}
+
+/* Markdown content: undo the global margin reset so paragraphs, lists and headings space out */
+.body > * + * {
+	margin-top: 1rem;
+}
+
+.body > :is(h2, h3, h4) + * {
+	margin-top: 0.5rem;
+}
+
+.body :is(h2, h3, h4) {
+	margin-bottom: 0;
+}
+
+.body * + :is(h2, h3, h4) {
+	margin-top: 2rem;
+}
+
+.body ul,
+.body ol {
+	padding-left: 1.25rem;
+}
+
+.body li + li {
+	margin-top: 0.25rem;
 }
 
 /* Experience */
