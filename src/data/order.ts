@@ -3,18 +3,23 @@
 export const home = [
 	'falling-engine',
 	'collabxr',
-	'echo-chamber',
+	'mifluids',
 	'echoes-of-isovios',
 ];
 
-export const work = [
+// /work top section: large tiles with role, team and stack.
+export const major = [
 	'falling-engine',
-	'chat-are-we-broke',
 	'collabxr',
 	'mifluids',
+	'echoes-of-isovios',
+];
+
+// /work bottom section: compact grid.
+export const minor = [
+	'chat-are-we-broke',
 	'swifter-wet-jet',
 	'nyc-service-watch',
-	'echoes-of-isovios',
 	'echo-chamber',
 	'take-care',
 	'crunchtime',

@@ -4,6 +4,9 @@ kind: project
 description: "Data-Oriented Game Engine"
 summary: "C++/OpenGL ECS engine sustaining 60+ FPS with 18M+ triangles."
 period: "2026"
+team: "solo"
+stack: ["C++", "OpenGL"]
+highlights: ["ECS", "glTF models", "scripting", "OpenGL renderer"]
 reel: /media/fallingengine.mp4
 poster: /media/fallingengine.jpg
 links:

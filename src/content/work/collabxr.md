@@ -4,6 +4,8 @@ kind: project
 description: "Open-Source Mixed Reality Classroom"
 summary: "Maintainer and Developer."
 period: "2026"
+role: "maintainer & developer"
+highlights: ["environment system overhaul", "contributor docs", "live demos & workshops"]
 reel: /media/collabxr.mp4
 poster: /media/collabxr.jpg
 links:

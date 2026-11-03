@@ -10,6 +10,11 @@ const work = defineCollection({
 		description: z.string(),
 		summary: z.string(),
 		period: z.string(),
+		// Spec block on the detail page, and tile meta. All optional; empty rows are skipped.
+		role: z.string().optional(),
+		team: z.string().optional(),
+		stack: z.array(z.string()).default([]),
+		highlights: z.array(z.string()).default([]),
 		// Paths under public/. Gallery entries ending in .mp4 or .webm render as reels.
 		reel: z.string(),
 		poster: z.string(),

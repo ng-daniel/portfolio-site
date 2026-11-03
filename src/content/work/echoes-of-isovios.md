@@ -4,6 +4,9 @@ kind: game
 description: "2D Action Platformer Roguelike"
 summary: "Built 17 enemies and 4 bosses on a 20+ person team as part of Purdue SIGGD, a collaborative game dev club."
 period: "2024 - 2026"
+role: "enemies & bosses"
+team: "20+ person team"
+highlights: ["17 enemies", "4 bosses", "shipped on Steam"]
 reel: /media/isovios.mp4
 poster: /media/isovios.jpg
 links:
