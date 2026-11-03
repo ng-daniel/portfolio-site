@@ -10,7 +10,7 @@ const featured = await getWork(home);
 
 <Base>
 	<section>
-		<p>
+		<p class="prose">
 			Welcome to my site! I'm a game dev and software engineer studying CS at Purdue University
 			with an interest in graphics, low-level game systems, and backend software.
 		</p>
@@ -19,6 +19,6 @@ const featured = await getWork(home);
 
 	<section>
 		<WorkGrid items={featured} />
-		<p class="more"><a href="/work">all work →</a></p>
+		<p class="more"><a href="/work">all work</a></p>
 	</section>
 </Base>

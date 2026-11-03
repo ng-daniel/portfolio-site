@@ -10,19 +10,31 @@
 	/* --accent: #86dfa3; */
 	/* --accent: #83b07e; */
 	/* --accent: #a692b0; */
-	--accent: #fffaf0;
+	--accent: #cfcac0;
 	/* Tile dither colors. The pattern is a mask from scripts/dither-poster.sh. */
 	--dither-dark: var(--bg);
 	--dither-light: var(--accent);
+	--font-sans: 'Geist', system-ui, sans-serif;
+	--font-mono: 'Geist Mono', ui-monospace, monospace;
 
 }
 
 html {
 	background-color: var(--bg);
 	color: var(--main);
-	font-family: 'Geist Mono', ui-monospace, monospace;
+	font-family: var(--font-mono);
 	font-size: 15px;
 	line-height: 1.5;
+}
+
+/* Mono carries the structure (nav, labels, captions, meta); anything read as sentences
+   switches to the sans, a touch larger since it reads smaller than mono at the same size. */
+.prose,
+.summary,
+.body,
+.highlights {
+	font-family: var(--font-sans);
+	font-size: 1.0625rem;
 }
 
 body {
@@ -86,6 +98,28 @@ a:focus-visible,
 a[aria-current="page"] {
 	text-decoration: underline;
 	text-underline-offset: 0.15em;
+}
+
+/* Brackets mark text links and filter buttons as clickable. Inline-block keeps the
+   underline off them, and the empty alt text keeps screen readers from announcing them. */
+a:not(.tile, .home-logo)::before,
+.filters button::before {
+	content: "[";
+	content: "[" / "";
+	display: inline-block;
+}
+
+a:not(.tile, .home-logo)::after,
+.filters button::after {
+	content: "]";
+	content: "]" / "";
+	display: inline-block;
+}
+
+/* Experience headings read as plain titles, so their links go without. */
+.entry-title a::before,
+.entry-title a::after {
+	content: none;
 }
 
 /* Header */

@@ -17,7 +17,7 @@ const { Content } = await render(item);
 ---
 
 <Base title={item.data.title} description={item.data.summary}>
-	<p class="back"><a href="/work" data-back>← all work</a></p>
+	<p class="back"><a href="/work" data-back>back to all work</a></p>
 	<article>
 		<Reel src={item.data.reel} poster={item.data.poster} alt={item.data.title} />
 		<h1>{item.data.title} <em>- {item.data.description}</em></h1>
