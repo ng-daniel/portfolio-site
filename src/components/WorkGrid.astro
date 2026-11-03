@@ -7,17 +7,24 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+// scripts/dither-poster.sh writes /media/dither/<name>.png for each /media/<name>.<ext> poster.
+const ditherPath = (poster: string) => poster.replace(/^(.*)\/([^/]+)\.\w+$/, '$1/dither/$2.png');
 ---
 
 <ul class="grid">
 	{items.map((item) => (
 		<li data-kind={item.data.kind}>
 			<a class="tile" href={`/work/${item.id}`}>
-				<Reel src={item.data.reel} poster={item.data.poster} alt={item.data.title} preload="none" />
+				<span class="frame">
+					<Reel src={item.data.reel} poster={item.data.poster} alt={item.data.title} preload="none" />
+					<img class="dither" src={ditherPath(item.data.poster)} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+				</span>
 				<span class="tile-caption">
 					<span>{item.data.title}</span>
 					<span class="meta">{item.data.kind}</span>
 				</span>
+				<span class="tile-description meta">{item.data.description}</span>
 			</a>
 		</li>
 	))}

@@ -33,7 +33,7 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap"
 			rel="stylesheet"
 		/>
 		<title>{title ? `${title} · Daniel Ng` : 'Daniel Ng'}</title>
@@ -78,6 +78,14 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 				tile.addEventListener('mouseleave', pause);
 				tile.addEventListener('focus', play);
 				tile.addEventListener('blur', pause);
+			});
+
+			// Grid tiles show a dithered poster until their reel is actually playing.
+			reels.forEach((reel) => {
+				const tile = reel.closest('.tile');
+				if (!tile) return;
+				reel.addEventListener('playing', () => tile.setAttribute('data-playing', ''));
+				reel.addEventListener('pause', () => tile.removeAttribute('data-playing'));
 			});
 
 			if (reduceMotion.matches) {

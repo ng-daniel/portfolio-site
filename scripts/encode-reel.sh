@@ -24,3 +24,6 @@ ffmpeg -y -ss "$start" -t "$duration" -i "$input" \
 	"$out_dir/$name.mp4"
 
 ffmpeg -y -ss "$start" -i "$input" -frames:v 1 -vf "scale=-2:720" -q:v 3 "$out_dir/$name.jpg"
+
+# Dithered copy of the poster for the work grid.
+"$(dirname "$0")/dither-poster.sh" "$name"

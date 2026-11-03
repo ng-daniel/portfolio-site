@@ -16,9 +16,9 @@
 html {
 	background-color: var(--bg);
 	color: var(--main);
-	font-family: 'Geist', sans-serif;
-	font-size: 16px;
-	line-height: 1.45;
+	font-family: 'Geist Mono', ui-monospace, monospace;
+	font-size: 15px;
+	line-height: 1.5;
 }
 
 body {
@@ -89,6 +89,7 @@ a[aria-current="page"] {
 .site-header {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	gap: 1rem;
 	margin-bottom: 2.5rem;
@@ -116,6 +117,7 @@ a[aria-current="page"] {
 .home-logo-name {
 	font-size: 1.25rem;
 	font-weight: 600;
+	white-space: nowrap;
 }
 
 .home-logo:hover,
@@ -188,7 +190,6 @@ a[aria-current="page"] {
 	width: 100%;
 	aspect-ratio: 16 / 9;
 	object-fit: cover;
-	border-radius: 4px;
 	background: #1e1e1e;
 }
 
@@ -197,8 +198,58 @@ a[aria-current="page"] {
 	color: var(--main);
 }
 
-.tile:hover .reel {
-	filter: brightness(1.1);
+.tile:focus-visible {
+	outline: none;
+}
+
+/* Grid tiles: a dithered poster sits over the reel until it plays, and
+   box-drawing corners bracket the tile on hover or focus. */
+
+.frame {
+	position: relative;
+	display: block;
+}
+
+.dither {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	image-rendering: pixelated;
+	transition: opacity 80ms steps(2);
+}
+
+.tile:is(:hover, :focus-visible) .dither,
+.tile[data-playing] .dither {
+	opacity: 0;
+}
+
+.frame::after {
+	--c: var(--accent);
+	--l: 0.75rem;
+	--t: 2px;
+	content: "";
+	position: absolute;
+	inset: -4px;
+	background:
+		linear-gradient(var(--c) 0 0) top left / var(--l) var(--t),
+		linear-gradient(var(--c) 0 0) top left / var(--t) var(--l),
+		linear-gradient(var(--c) 0 0) top right / var(--l) var(--t),
+		linear-gradient(var(--c) 0 0) top right / var(--t) var(--l),
+		linear-gradient(var(--c) 0 0) bottom left / var(--l) var(--t),
+		linear-gradient(var(--c) 0 0) bottom left / var(--t) var(--l),
+		linear-gradient(var(--c) 0 0) bottom right / var(--l) var(--t),
+		linear-gradient(var(--c) 0 0) bottom right / var(--t) var(--l);
+	background-repeat: no-repeat;
+	opacity: 0;
+	pointer-events: none;
+	transition: inset 60ms steps(2), opacity 60ms steps(2);
+}
+
+.tile:is(:hover, :focus-visible) .frame::after {
+	opacity: 1;
+	inset: -8px;
 }
 
 .tile-caption {
@@ -206,6 +257,10 @@ a[aria-current="page"] {
 	justify-content: space-between;
 	gap: 1rem;
 	margin-top: 0.5rem;
+}
+
+.tile-description {
+	display: block;
 }
 
 .more {
