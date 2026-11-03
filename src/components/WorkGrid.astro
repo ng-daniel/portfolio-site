@@ -18,7 +18,7 @@ const ditherPath = (poster: string) => poster.replace(/^(.*)\/([^/]+)\.\w+$/, '$
 			<a class="tile" href={`/work/${item.id}`}>
 				<span class="frame">
 					<Reel src={item.data.reel} poster={item.data.poster} alt={item.data.title} preload="none" />
-					<img class="dither" src={ditherPath(item.data.poster)} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+					<span class="dither" style={`--dither: url('${ditherPath(item.data.poster)}')`} aria-hidden="true"></span>
 				</span>
 				<span class="tile-caption">
 					<span>{item.data.title}</span>

@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
-# Turns poster frames into small two-tone dithered images for the work grid.
+# Turns poster frames into small dithered masks for the work grid.
 #
 #   scripts/dither-poster.sh <name>...   dither the named posters
 #   scripts/dither-poster.sh --all       dither every poster in public/media
 #
-# Reads public/media/<name>.jpg (or .png) and writes public/media/dither/<name>.png,
-# which WorkGrid shows over each tile until its reel plays.
+# Reads public/media/<name>.jpg (or .png) and writes public/media/dither/<name>.png: opaque
+# where the poster dithers light, transparent where it dithers dark. WorkGrid uses it as a
+# CSS mask over each tile until its reel plays, so the colors come from --dither-light and
+# --dither-dark in src/styles/index.css and change without rerunning this script.
 set -euo pipefail
 
 media_dir="public/media"
 out_dir="$media_dir/dither"
 
-# Dark and light tones, matching --bg and --accent in src/styles/index.css.
-dark="#121216"
-light="#a692b0"
-
-# Dither pattern. Append ",3" (e.g. o8x8,3) to add a midtone between the two colors.
+# Dither pattern. Append ",3" (e.g. o8x8,3) to add a half-transparent midtone between the two colors.
 pattern="o8x8"
 
 # Brightens shadows before dithering so dark footage lights enough dots. Higher is brighter; 1 is off.
@@ -73,7 +71,7 @@ for name in "${names[@]}"; do
 		# -normalize stretches contrast first so dark game footage doesn't dither to solid background.
 		magick "$src" -resize "$size^" -gravity center -extent "$size" \
 			-grayscale "$grayscale" -normalize -gamma "$gamma" "${tone[@]}" -ordered-dither "$pattern" \
-			+level-colors "$dark,$light" -strip "$out_dir/$name.png"
+			-background white -alpha shape -strip "$out_dir/$name.png"
 	)
 	echo "$out_dir/$name.png"
 done
