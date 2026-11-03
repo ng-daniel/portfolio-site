@@ -59,9 +59,10 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 			)}
 		</main>
 		<script is:inline>
-			// Reels only play while on screen, and stay on their poster for
-			// visitors who prefer reduced motion. On devices with a mouse, grid
-			// tiles wait for hover or keyboard focus instead.
+			// Reels only play while on screen. On devices with a mouse, grid
+			// tiles wait for hover or keyboard focus instead. Visitors who prefer
+			// reduced motion get no autoplay: hover and focus still play, since
+			// they're deliberate, and reels outside the grid show controls.
 			const reels = Array.from(document.querySelectorAll('video[data-reel]'));
 			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 			const canHover = window.matchMedia('(hover: hover)').matches;
@@ -70,9 +71,7 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 
 			hoverReels.forEach((reel) => {
 				const tile = reel.closest('.tile');
-				const play = () => {
-					if (!reduceMotion.matches) reel.play().catch(() => {});
-				};
+				const play = () => reel.play().catch(() => {});
 				const pause = () => reel.pause();
 
 				tile.addEventListener('mouseenter', play);
@@ -80,6 +79,13 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 				tile.addEventListener('focus', play);
 				tile.addEventListener('blur', pause);
 			});
+
+			if (reduceMotion.matches) {
+				reels.filter((reel) => !reel.closest('.tile')).forEach((reel) => {
+					reel.controls = true;
+					reel.removeAttribute('aria-hidden');
+				});
+			}
 
 			if (scrollReels.length > 0 && 'IntersectionObserver' in window) {
 				const observer = new IntersectionObserver((entries) => {
