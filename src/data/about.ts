@@ -24,6 +24,10 @@ export const experience: Experience[] = [
 			'Architected core Unity/C# systems for a fluid dynamics lab used by 400+ students',
 			'Maintaining CollabXR, an open-source mixed reality classroom'
 		],
+		related: [
+			{ label: 'CollabXR', href: '/work/collabxr' },
+			{ label: 'MiFluids', href: '/work/mifluids' }
+		]
 	},
 	{
 		role: 'Independent Game Developer',

@@ -4,21 +4,37 @@
 	color-scheme: dark;
 	/* --bg: #141414; */
 	/* --main: #e6e6e6; */
-	--bg: #121216;
-	--main: #e8e6e1;
+	--bg: #1d203a;
+	--main: #fffaf0;
 	--muted: #8a8a8a;
 	/* --accent: #86dfa3; */
 	/* --accent: #83b07e; */
-	--accent: #a692b0;
+	/* --accent: #a692b0; */
+	--accent: #efeae0;
+	/* Tile dither colors. The pattern is a mask from scripts/dither-poster.sh. */
+	--dither-dark: var(--bg);
+	--dither-light: var(--accent);
+	--font-sans: 'Geist', system-ui, sans-serif;
+	--font-mono: 'Geist Mono', ui-monospace, monospace;
 
 }
 
 html {
 	background-color: var(--bg);
 	color: var(--main);
-	font-family: 'Geist', sans-serif;
-	font-size: 16px;
-	line-height: 1.45;
+	font-family: var(--font-mono);
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+/* Mono carries the structure (nav, labels, captions, meta); anything read as sentences
+   switches to the sans, a touch larger since it reads smaller than mono at the same size. */
+.prose,
+.summary,
+.body,
+.highlights {
+	font-family: var(--font-sans);
+	font-size: 1.0625rem;
 }
 
 body {
@@ -84,11 +100,34 @@ a[aria-current="page"] {
 	text-underline-offset: 0.15em;
 }
 
+/* Brackets mark text links and filter buttons as clickable. Inline-block keeps the
+   underline off them, and the empty alt text keeps screen readers from announcing them. */
+a:not(.tile, .home-logo)::before,
+.filters button::before {
+	content: "[";
+	content: "[" / "";
+	display: inline-block;
+}
+
+a:not(.tile, .home-logo)::after,
+.filters button::after {
+	content: "]";
+	content: "]" / "";
+	display: inline-block;
+}
+
+/* Experience headings read as plain titles, so their links go without. */
+.entry-title a::before,
+.entry-title a::after {
+	content: none;
+}
+
 /* Header */
 
 .site-header {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	gap: 1rem;
 	margin-bottom: 2.5rem;
@@ -116,6 +155,7 @@ a[aria-current="page"] {
 .home-logo-name {
 	font-size: 1.25rem;
 	font-weight: 600;
+	white-space: nowrap;
 }
 
 .home-logo:hover,
@@ -188,7 +228,6 @@ a[aria-current="page"] {
 	width: 100%;
 	aspect-ratio: 16 / 9;
 	object-fit: cover;
-	border-radius: 4px;
 	background: #1e1e1e;
 }
 
@@ -197,8 +236,65 @@ a[aria-current="page"] {
 	color: var(--main);
 }
 
-.tile:hover .reel {
-	filter: brightness(1.1);
+.tile:focus-visible {
+	outline: none;
+}
+
+/* Grid tiles: a dithered poster sits over the reel until it plays, and
+   box-drawing corners bracket the tile on hover or focus. */
+
+.frame {
+	position: relative;
+	display: block;
+}
+
+.dither {
+	position: absolute;
+	inset: 0;
+	background: var(--dither-dark);
+	transition: opacity 80ms steps(2);
+}
+
+.dither::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: var(--dither-light);
+	mask: var(--dither) center / cover no-repeat;
+	-webkit-mask: var(--dither) center / cover no-repeat;
+	image-rendering: pixelated;
+}
+
+.tile:is(:hover, :focus-visible) .dither,
+.tile[data-playing] .dither {
+	opacity: 0;
+}
+
+.frame::after {
+	--c: var(--accent);
+	--l: 0.75rem;
+	--t: 2px;
+	content: "";
+	position: absolute;
+	inset: -4px;
+	background:
+		linear-gradient(var(--c) 0 0) top left / var(--l) var(--t),
+		linear-gradient(var(--c) 0 0) top left / var(--t) var(--l),
+		linear-gradient(var(--c) 0 0) top right / var(--l) var(--t),
+		linear-gradient(var(--c) 0 0) top right / var(--t) var(--l),
+		linear-gradient(var(--c) 0 0) bottom left / var(--l) var(--t),
+		linear-gradient(var(--c) 0 0) bottom left / var(--t) var(--l),
+		linear-gradient(var(--c) 0 0) bottom right / var(--l) var(--t),
+		linear-gradient(var(--c) 0 0) bottom right / var(--t) var(--l);
+	background-repeat: no-repeat;
+	opacity: 0;
+	pointer-events: none;
+	transition: inset 60ms steps(2), opacity 60ms steps(2);
+}
+
+.tile:is(:hover, :focus-visible) .frame::after {
+	opacity: 1;
+	inset: -8px;
 }
 
 .tile-caption {
@@ -206,6 +302,10 @@ a[aria-current="page"] {
 	justify-content: space-between;
 	gap: 1rem;
 	margin-top: 0.5rem;
+}
+
+.tile-description {
+	display: block;
 }
 
 .more {
