@@ -18,7 +18,7 @@ const { item } = Astro.props;
 		<p class="related meta">
 			related: {item.related.map((link, i) => (
 				<>{i > 0 && ', '}<a href={link.href}>{link.label}</a></>
-			))} →
+			))}
 		</p>
 	)}
 </article>
