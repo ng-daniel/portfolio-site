@@ -72,12 +72,25 @@ h2 {
 	margin-bottom: 1rem;
 }
 
+h2:has(+ .subtitle) {
+	margin-bottom: 0.15rem;
+}
+
+.subtitle {
+	margin-bottom: 1rem;
+}
+
 em {
 	font-weight: 400;
 }
 
 section {
 	margin: 0 0 2.5rem;
+}
+
+/* /work sections hold long strip lists, so they need more room between them. */
+.work-section {
+	margin-bottom: 6rem;
 }
 
 .meta {
@@ -101,15 +114,17 @@ a[aria-current="page"] {
 	text-underline-offset: 0.15em;
 }
 
-/* Brackets mark text links as clickable. Inline-block keeps the
+/* Brackets mark text links and section tabs as clickable. Inline-block keeps the
    underline off them, and the empty alt text keeps screen readers from announcing them. */
-a:not(.tile, .home-logo)::before {
+a:not(.tile, .home-logo)::before,
+.filters button::before {
 	content: "[";
 	content: "[" / "";
 	display: inline-block;
 }
 
-a:not(.tile, .home-logo)::after {
+a:not(.tile, .home-logo)::after,
+.filters button::after {
 	content: "]";
 	content: "]" / "";
 	display: inline-block;
@@ -177,7 +192,7 @@ a:not(.tile, .home-logo)::after {
 	margin-top: 3.5rem;
 }
 
-/* Inline link rows: nav, contacts, project links */
+/* Inline link rows: nav, contacts, project links, section tabs */
 
 .links {
 	display: flex;
@@ -188,6 +203,28 @@ a:not(.tile, .home-logo)::after {
 
 .site-header .links {
 	margin-top: 0;
+}
+
+.filters {
+	margin: 0 0 2rem;
+}
+
+.filters button {
+	appearance: none;
+	background: none;
+	border: 0;
+	padding: 0;
+	font: inherit;
+	color: var(--muted);
+	cursor: pointer;
+}
+
+.filters button[aria-pressed="true"] {
+	color: var(--accent);
+}
+
+.work-section[hidden] {
+	display: none;
 }
 
 /* Media */
@@ -474,6 +511,7 @@ article > .grid {
 a,
 h2,
 .home-logo-mark,
+.filters button,
 .highlights li::before {
 	transition: color var(--transition-speed) var(--transition-easing), background-color var(--transition-speed) var(--transition-easing), border-color var(--transition-speed) var(--transition-easing);
 }

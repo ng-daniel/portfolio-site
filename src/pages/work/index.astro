@@ -1,21 +1,54 @@
 ---
 import Base from '../../layouts/Base.astro';
 import WorkGrid from '../../components/WorkGrid.astro';
-import { getWork } from '../../data/work';
-import { major, minor } from '../../data/order';
+import { getSections } from '../../data/work';
 
-const majorItems = await getWork(major);
-const minorItems = await getWork(minor, { appendUnlisted: true });
+const sections = await getSections();
+const tabs = [{ id: 'all', title: 'All' }, ...sections];
 ---
 
 <Base title="Work">
-	<section aria-labelledby="major">
-		<h2 id="major">Featured Work</h2>
-		<WorkGrid items={majorItems} variant="strips" />
-	</section>
+	<div class="links filters" role="group" aria-label="Show section">
+		{tabs.map((tab) => (
+			<button type="button" data-show={tab.id} aria-pressed={tab.id === 'all' ? 'true' : 'false'}>
+				{tab.title}
+			</button>
+		))}
+	</div>
 
-	<section aria-labelledby="minor">
-		<h2 id="minor">Other Works</h2>
-		<WorkGrid items={minorItems} variant="strips" />
-	</section>
+	{sections.map((section) => (
+		<section class="work-section" data-section={section.id} aria-labelledby={section.id}>
+			<h2 id={section.id}>{section.title}</h2>
+			{section.subtitle && <p class="subtitle meta">{section.subtitle}</p>}
+			<WorkGrid items={section.entries} variant="strips" />
+		</section>
+	))}
+
+	<script is:inline>
+		// The chosen section goes in ?show= so reloading, sharing the link, or
+		// coming back from a project page keeps it.
+		const buttons = document.querySelectorAll('[data-show]');
+		const sections = document.querySelectorAll('[data-section]');
+
+		const show = (id) => {
+			if (![...buttons].some((button) => button.dataset.show === id)) id = 'all';
+			buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.show === id)));
+			sections.forEach((section) => {
+				section.hidden = id !== 'all' && section.dataset.section !== id;
+			});
+		};
+
+		buttons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const id = button.dataset.show;
+				show(id);
+				const url = new URL(location.href);
+				if (id === 'all') url.searchParams.delete('show');
+				else url.searchParams.set('show', id);
+				history.replaceState(history.state, '', url);
+			});
+		});
+
+		show(new URLSearchParams(location.search).get('show') ?? 'all');
+	</script>
 </Base>

@@ -7,26 +7,42 @@ export const home = [
 	'echoes-of-isovios',
 ];
 
-// /work top section: large tiles with role, team and stack.
-export const major = [
-	'falling-engine',
-	'collabxr',
-	'mifluids',
-	'echoes-of-isovios',
-];
-
-// /work bottom section: compact grid.
-export const minor = [
-	'chat-are-we-broke',
-	'swifter-wet-jet',
-	'nyc-service-watch',
-	'echo-chamber',
-	'take-care',
-	'crunchtime',
-	'drag',
-	'burnup',
-	'wyrmhole',
-	'sos-pito',
-	'marianne',
-	'spitfire',
+// /work sections, top to bottom. Add, remove or reorder entries here; each
+// project can be in only one section. Projects missing from every section are
+// appended to the last one. `subtitle` is optional.
+export const sections: { title: string; subtitle?: string; items: string[] }[] = [
+	{
+		title: 'Featured Work',
+		subtitle: 'My best, most impactful work.',
+		items: [
+			'falling-engine',
+			'collabxr',
+			'mifluids',
+			'echoes-of-isovios',
+		],
+	},
+	{
+		title: 'Other Works',
+		subtitle: 'Miscellaneous games and software applications.',
+		items: [
+			'nyc-service-watch',
+			'crunchtime',
+			'wyrmhole',
+		],
+	},
+	{
+		title: 'Game Jams',
+		subtitle: 'I love game jams!',
+		items: [
+			'chat-are-we-broke',
+			'swifter-wet-jet',
+			'echo-chamber',
+			'take-care',
+			'drag',
+			'burnup',
+			'sos-pito',
+			'marianne',
+			'spitfire',
+		],
+	},
 ];
