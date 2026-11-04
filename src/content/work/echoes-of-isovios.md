@@ -2,10 +2,11 @@
 title: "Echoes of Isovios"
 kind: game
 description: "2D Action Platformer Roguelike"
-summary: "Built 17 enemies and 4 bosses on a 20+ person team as part of Purdue SIGGD, a collaborative game dev club."
+summary: "A game where you fight robots, demons, mages, and dragons to rectify past mistakes."
 period: "2024 - 2026"
-role: "enemies & bosses"
-team: "20+ person team"
+role: "enemies & bosses subteam lead"
+team: "30+ person team"
+stack: ["Unity", "C#"]
 highlights: ["17 enemies", "4 bosses", "shipped on Steam"]
 reel: /media/isovios.mp4
 poster: /media/isovios.jpg

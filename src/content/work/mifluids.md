@@ -2,11 +2,11 @@
 title: "MiFluids"
 kind: project
 description: "Virtual Fluid Dynamics Lab"
-summary: "Unity/C# systems for a virtual fluid dynamics lab used by 400+ students."
+summary: "A high-resolution interactive wind tunnel used by 400+ students."
 period: "2026"
-role: "systems & optimization"
-team: "team of 3"
-stack: ["Unity", "C#"]
+role: "core systems & optimization"
+team: "3 members"
+stack: ["Unity", "C#", "Python"]
 highlights: ["heap fragmentation profiling", "custom chunk allocator", "probe/rake sampling", "scenario swapping"]
 reel: /media/mifluids.mp4
 poster: /media/mifluids.jpg

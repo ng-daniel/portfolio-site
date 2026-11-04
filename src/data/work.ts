@@ -47,6 +47,7 @@ export function tileRows(item: CollectionEntry<'work'>): [string, string][] {
 
 // Compact tile meta: team if set, otherwise the latest year in the period.
 export function tileMeta(item: CollectionEntry<'work'>): string {
-	const { team, period } = item.data;
-	return team ?? period.match(/\d{4}(?!.*\d{4})/)?.[0] ?? period;
+	// const { team, period } = item.data;
+	// return team ?? period.match(/\d{4}(?!.*\d{4})/)?.[0] ?? period;
+	return item.data.period;
 }

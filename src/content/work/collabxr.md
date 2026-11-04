@@ -2,10 +2,12 @@
 title: "CollabXR"
 kind: project
 description: "Open-Source Mixed Reality Classroom"
-summary: "Maintainer and Developer."
+summary: "A multiplayer VR/XR application for immersive, interactive 3D data visualization."
 period: "2026"
 role: "maintainer & developer"
-highlights: ["environment system overhaul", "contributor docs", "live demos & workshops"]
+team: "5-10 members"
+stack: ["Unity", "C#", "Photon", "Meta XR SDK"]
+highlights: ["environment system overhaul", "client-server synchronization", "contributor docs"]
 reel: /media/collabxr.mp4
 poster: /media/collabxr.jpg
 links:
