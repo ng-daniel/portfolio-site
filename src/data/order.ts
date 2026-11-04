@@ -13,7 +13,7 @@ export const home = [
 export const sections: { title: string; subtitle?: string; items: string[] }[] = [
 	{
 		title: 'Featured Work',
-		subtitle: 'My best, most impactful work.',
+		subtitle: 'My favorite and most impactful projects.',
 		items: [
 			'falling-engine',
 			'collabxr',
