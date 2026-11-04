@@ -1,7 +1,7 @@
 ---
 title: "Chat, Are We Broke?"
 kind: game
-description: "Infinite shopping on a timer"
+description: "An Infinite Shopping Spree"
 summary: "Bankrupt a livestreamer in an endless department store. GMTK Game Jam 2026."
 period: "July 2026"
 reel: /media/chatrwebroke.mp4

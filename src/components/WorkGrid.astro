@@ -7,15 +7,17 @@ interface Props {
 	items: CollectionEntry<'work'>[];
 	// major: one tile per row, reel beside the text. compact: two-column grid.
 	variant?: 'major' | 'compact';
+	// Compact only: three columns instead of two.
+	dense?: boolean;
 }
 
-const { items, variant = 'compact' } = Astro.props;
+const { items, variant = 'compact', dense = false } = Astro.props;
 
 // scripts/dither-poster.sh writes /media/dither/<name>.png for each /media/<name>.<ext> poster.
 const ditherPath = (poster: string) => poster.replace(/^(.*)\/([^/]+)\.\w+$/, '$1/dither/$2.png');
 ---
 
-<ul class:list={['grid', { major: variant === 'major' }]}>
+<ul class:list={['grid', { major: variant === 'major', dense }]}>
 	{items.map((item) => (
 		<li>
 			<a class="tile" href={`/work/${item.id}`}>
@@ -39,7 +41,7 @@ const ditherPath = (poster: string) => poster.replace(/^(.*)\/([^/]+)\.\w+$/, '$
 					<>
 						<span class="tile-caption">
 							<span>{item.data.title}</span>
-							<span class="meta">{tileMeta(item)}</span>
+							{!dense && <span class="meta">{tileMeta(item)}</span>}
 						</span>
 						<span class="tile-description meta">{item.data.description}</span>
 					</>

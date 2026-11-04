@@ -200,6 +200,10 @@ a:not(.tile, .home-logo)::after {
 	list-style: none;
 }
 
+.grid.dense {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .grid.major {
 	grid-template-columns: 1fr;
 	gap: 2.5rem;
@@ -261,9 +265,10 @@ a:not(.tile, .home-logo)::after {
 	display: block;
 }
 
+/* Bleeds 1px past the reel so subpixel rounding can't leave a sliver of video at the edges. */
 .dither {
 	position: absolute;
-	inset: 0;
+	inset: -1px;
 	background: var(--dither-dark);
 	transition: opacity 80ms steps(2);
 }
@@ -470,8 +475,15 @@ h2,
 	transition: color var(--transition-speed) var(--transition-easing), background-color var(--transition-speed) var(--transition-easing), border-color var(--transition-speed) var(--transition-easing);
 }
 
+@media (max-width: 860px) {
+	.grid.dense {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
 @media (max-width: 640px) {
 	.grid,
+	.grid.dense,
 	.grid.major .tile {
 		grid-template-columns: 1fr;
 	}
