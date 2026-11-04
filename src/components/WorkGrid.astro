@@ -5,19 +5,20 @@ import { tileMeta, tileRows } from '../data/work';
 
 interface Props {
 	items: CollectionEntry<'work'>[];
-	// major: one tile per row, reel beside the text. compact: two-column grid.
-	variant?: 'major' | 'compact';
+	// strips: one per row, reel beside the text. compact: two-column grid.
+	variant?: 'strips' | 'compact';
 	// Compact only: three columns instead of two.
 	dense?: boolean;
 }
 
 const { items, variant = 'compact', dense = false } = Astro.props;
+const strips = variant === 'strips';
 
 // scripts/dither-poster.sh writes /media/dither/<name>.png for each /media/<name>.<ext> poster.
 const ditherPath = (poster: string) => poster.replace(/^(.*)\/([^/]+)\.\w+$/, '$1/dither/$2.png');
 ---
 
-<ul class:list={['grid', { major: variant === 'major', dense }]}>
+<ul class:list={['grid', { strips, dense }]}>
 	{items.map((item) => (
 		<li>
 			<a class="tile" href={`/work/${item.id}`}>
@@ -25,7 +26,7 @@ const ditherPath = (poster: string) => poster.replace(/^(.*)\/([^/]+)\.\w+$/, '$
 					<Reel src={item.data.reel} poster={item.data.poster} alt={item.data.title} preload="none" />
 					<span class="dither" style={`--dither: url('${ditherPath(item.data.poster)}')`} aria-hidden="true"></span>
 				</span>
-				{variant === 'major' ? (
+				{strips ? (
 					<span class="tile-text">
 						<span class="tile-caption">
 							<span>{item.data.title}</span>

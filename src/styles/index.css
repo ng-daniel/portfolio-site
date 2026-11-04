@@ -48,7 +48,7 @@ body {
 
 main {
 	box-sizing: border-box;
-	max-width: 56rem;
+	max-width: 62rem;
 	width: 100%;
 	padding: 0 1rem;
 }
@@ -204,21 +204,20 @@ a:not(.tile, .home-logo)::after {
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.grid.major {
+.grid.strips {
 	grid-template-columns: 1fr;
-	gap: 2.5rem;
+	gap: 1.75rem;
 }
 
-/* Major tiles: reel on the left, what I did and how on the right. Columns match
-   the compact grid so the reel is the same size as a small tile's. */
-.grid.major .tile {
+/* Strips: reel on the left, what I did and how on the right. */
+.grid.strips .tile {
 	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
 	gap: 1rem;
 	align-items: start;
 }
 
-.grid.major .tile-caption {
+.grid.strips .tile-caption {
 	margin-top: 0;
 }
 
@@ -234,6 +233,10 @@ a:not(.tile, .home-logo)::after {
 
 .tile-meta {
 	margin-top: 0.6rem;
+}
+
+.tile-meta:empty {
+	display: none;
 }
 
 .tile-meta > span {
@@ -475,7 +478,7 @@ h2,
 	transition: color var(--transition-speed) var(--transition-easing), background-color var(--transition-speed) var(--transition-easing), border-color var(--transition-speed) var(--transition-easing);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 960px) {
 	.grid.dense {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
@@ -483,16 +486,17 @@ h2,
 
 @media (max-width: 640px) {
 	.grid,
-	.grid.dense,
-	.grid.major .tile {
+	.grid.dense {
 		grid-template-columns: 1fr;
 	}
 
-	.grid.major .tile {
+	/* Strips stack the reel over the text once side by side gets too cramped. */
+	.grid.strips .tile {
+		grid-template-columns: 1fr;
 		gap: 0;
 	}
 
-	.grid.major .tile-caption {
+	.grid.strips .tile-caption {
 		margin-top: 0.5rem;
 	}
 

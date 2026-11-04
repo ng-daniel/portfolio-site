@@ -10,12 +10,12 @@ const minorItems = await getWork(minor, { appendUnlisted: true });
 
 <Base title="Work">
 	<section aria-labelledby="major">
-		<h2 id="major">major projects</h2>
-		<WorkGrid items={majorItems} variant="major" />
+		<h2 id="major">Featured Work</h2>
+		<WorkGrid items={majorItems} variant="strips" />
 	</section>
 
 	<section aria-labelledby="minor">
-		<h2 id="minor">jams &amp; smaller projects</h2>
-		<WorkGrid items={minorItems} dense />
+		<h2 id="minor">Other Works</h2>
+		<WorkGrid items={minorItems} variant="strips" />
 	</section>
 </Base>

@@ -2,7 +2,7 @@
 title: "burnup!"
 kind: game
 description: "Press SPACE to survive."
-summary: "A one-button arcade asteroid defense game. Mini Jam 162: Heat."
+summary: "A one-button asteroid defense. Placed 5/132 overall in Mini Jam 162: Heat."
 period: "July 2024"
 reel: /media/burnup.mp4
 poster: /media/burnup.jpg
