@@ -1,30 +1,52 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Reel from './Reel.astro';
+import { tileMeta, tileRows } from '../data/work';
 
 interface Props {
 	items: CollectionEntry<'work'>[];
+	// strips: one per row, reel beside the text. compact: two-column grid.
+	variant?: 'strips' | 'compact';
+	// Compact only: three columns instead of two.
+	dense?: boolean;
 }
 
-const { items } = Astro.props;
+const { items, variant = 'compact', dense = false } = Astro.props;
+const strips = variant === 'strips';
 
 // scripts/dither-poster.sh writes /media/dither/<name>.png for each /media/<name>.<ext> poster.
 const ditherPath = (poster: string) => poster.replace(/^(.*)\/([^/]+)\.\w+$/, '$1/dither/$2.png');
 ---
 
-<ul class="grid">
+<ul class:list={['grid', { strips, dense }]}>
 	{items.map((item) => (
-		<li data-kind={item.data.kind}>
+		<li>
 			<a class="tile" href={`/work/${item.id}`}>
 				<span class="frame">
 					<Reel src={item.data.reel} poster={item.data.poster} alt={item.data.title} preload="none" />
 					<span class="dither" style={`--dither: url('${ditherPath(item.data.poster)}')`} aria-hidden="true"></span>
 				</span>
-				<span class="tile-caption">
-					<span>{item.data.title}</span>
-					<span class="meta">{item.data.kind}</span>
-				</span>
-				<span class="tile-description meta">{item.data.description}</span>
+				{strips ? (
+					<span class="tile-text">
+						<span class="tile-caption">
+							<span>{item.data.title}</span>
+							<span class="meta">{item.data.period}</span>
+						</span>
+						<span class="tile-description meta">{item.data.description}</span>
+						<span class="tile-summary">{item.data.summary}</span>
+						<span class="tile-meta meta">
+							{tileRows(item).map(([label, value]) => <span>{label}: {value}</span>)}
+						</span>
+					</span>
+				) : (
+					<>
+						<span class="tile-caption">
+							<span>{item.data.title}</span>
+							{!dense && <span class="meta">{tileMeta(item)}</span>}
+						</span>
+						<span class="tile-description meta">{item.data.description}</span>
+					</>
+				)}
 			</a>
 		</li>
 	))}

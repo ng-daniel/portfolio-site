@@ -1,7 +1,7 @@
 ---
 title: "Wyrmhole"
 kind: game
-description: "Snake X Bullet Hell"
+description: "Bullet Hell Snake"
 summary: "A fusion of classic snake and bullet hells, with wormhole mechanics just for fun."
 period: "May 2024"
 reel: /media/wyrmhole.mp4

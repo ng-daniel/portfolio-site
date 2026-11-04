@@ -32,7 +32,8 @@ html {
 .prose,
 .summary,
 .body,
-.highlights {
+.highlights,
+.tile-summary {
 	font-family: var(--font-sans);
 	font-size: 1.0625rem;
 }
@@ -47,7 +48,7 @@ body {
 
 main {
 	box-sizing: border-box;
-	max-width: 56rem;
+	max-width: 62rem;
 	width: 100%;
 	padding: 0 1rem;
 }
@@ -71,12 +72,25 @@ h2 {
 	margin-bottom: 1rem;
 }
 
+h2:has(+ .subtitle) {
+	margin-bottom: 0.15rem;
+}
+
+.subtitle {
+	margin-bottom: 1rem;
+}
+
 em {
 	font-weight: 400;
 }
 
 section {
 	margin: 0 0 2.5rem;
+}
+
+/* /work sections hold long strip lists, so they need more room between them. */
+.work-section {
+	margin-bottom: 6rem;
 }
 
 .meta {
@@ -100,7 +114,7 @@ a[aria-current="page"] {
 	text-underline-offset: 0.15em;
 }
 
-/* Brackets mark text links and filter buttons as clickable. Inline-block keeps the
+/* Brackets mark text links and section tabs as clickable. Inline-block keeps the
    underline off them, and the empty alt text keeps screen readers from announcing them. */
 a:not(.tile, .home-logo)::before,
 .filters button::before {
@@ -178,7 +192,7 @@ a:not(.tile, .home-logo)::after,
 	margin-top: 3.5rem;
 }
 
-/* Inline link rows: nav, contacts, project links, filters */
+/* Inline link rows: nav, contacts, project links, section tabs */
 
 .links {
 	display: flex;
@@ -192,7 +206,7 @@ a:not(.tile, .home-logo)::after,
 }
 
 .filters {
-	margin: 0 0 1.25rem;
+	margin: 0 0 2rem;
 }
 
 .filters button {
@@ -209,6 +223,10 @@ a:not(.tile, .home-logo)::after,
 	color: var(--accent);
 }
 
+.work-section[hidden] {
+	display: none;
+}
+
 /* Media */
 
 .grid {
@@ -219,8 +237,47 @@ a:not(.tile, .home-logo)::after,
 	list-style: none;
 }
 
-.grid li[hidden] {
+.grid.dense {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid.strips {
+	grid-template-columns: 1fr;
+	gap: 1.75rem;
+}
+
+/* Strips: reel on the left, what I did and how on the right. */
+.grid.strips .tile {
+	display: grid;
+	grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
+	gap: 1rem;
+	align-items: start;
+}
+
+.grid.strips .tile-caption {
+	margin-top: 0;
+}
+
+.tile-text,
+.tile-summary,
+.tile-meta {
+	display: block;
+}
+
+.tile-summary {
+	margin-top: 0.6rem;
+}
+
+.tile-meta {
+	margin-top: 0.6rem;
+}
+
+.tile-meta:empty {
 	display: none;
+}
+
+.tile-meta > span {
+	display: block;
 }
 
 .reel {
@@ -248,9 +305,10 @@ a:not(.tile, .home-logo)::after,
 	display: block;
 }
 
+/* Bleeds 1px past the reel so subpixel rounding can't leave a sliver of video at the edges. */
 .dither {
 	position: absolute;
-	inset: 0;
+	inset: -1px;
 	background: var(--dither-dark);
 	transition: opacity 80ms steps(2);
 }
@@ -316,6 +374,10 @@ a:not(.tile, .home-logo)::after,
 
 .back {
 	margin-bottom: 1.25rem;
+}
+
+article > .spec {
+	margin-top: 0.75rem;
 }
 
 article > .reel {
@@ -428,18 +490,21 @@ article > .grid {
 	margin-top: 0.4rem;
 }
 
-.skills {
+.skills,
+.spec {
 	display: grid;
 	grid-template-columns: max-content minmax(0, 1fr);
 	gap: 0.4rem 1.5rem;
 	margin: 0;
 }
 
-.skills dt {
+.skills dt,
+.spec dt {
 	color: var(--muted);
 }
 
-.skills dd {
+.skills dd,
+.spec dd {
 	margin: 0;
 }
 
@@ -451,9 +516,26 @@ h2,
 	transition: color var(--transition-speed) var(--transition-easing), background-color var(--transition-speed) var(--transition-easing), border-color var(--transition-speed) var(--transition-easing);
 }
 
+@media (max-width: 960px) {
+	.grid.dense {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
 @media (max-width: 640px) {
-	.grid {
+	.grid,
+	.grid.dense {
 		grid-template-columns: 1fr;
+	}
+
+	/* Strips stack the reel over the text once side by side gets too cramped. */
+	.grid.strips .tile {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+
+	.grid.strips .tile-caption {
+		margin-top: 0.5rem;
 	}
 
 	.skills {

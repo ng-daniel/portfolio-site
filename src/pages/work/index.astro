@@ -1,43 +1,54 @@
 ---
 import Base from '../../layouts/Base.astro';
 import WorkGrid from '../../components/WorkGrid.astro';
-import { getWork } from '../../data/work';
-import { work } from '../../data/order';
+import { getSections } from '../../data/work';
 
-const items = await getWork(work);
-
-const filters = [
-	{ label: 'all', kind: 'all' },
-	{ label: 'games', kind: 'game' },
-	{ label: 'projects', kind: 'project' },
-];
+const sections = await getSections();
+const tabs = [{ id: 'all', title: 'All' }, ...sections];
 ---
 
 <Base title="Work">
-	<section>
-		<div class="links filters" role="group" aria-label="Filter work">
-			{filters.map((filter) => (
-				<button type="button" data-filter={filter.kind} aria-pressed={filter.kind === 'all' ? 'true' : 'false'}>
-					{filter.label}
-				</button>
-			))}
-		</div>
-		<WorkGrid items={items} />
-	</section>
+	<div class="links filters" role="group" aria-label="Show section">
+		{tabs.map((tab) => (
+			<button type="button" data-show={tab.id} aria-pressed={tab.id === 'all' ? 'true' : 'false'}>
+				{tab.title}
+			</button>
+		))}
+	</div>
+
+	{sections.map((section) => (
+		<section class="work-section" data-section={section.id} aria-labelledby={section.id}>
+			<h2 id={section.id}>{section.title}</h2>
+			{section.subtitle && <p class="subtitle meta">{section.subtitle}</p>}
+			<WorkGrid items={section.entries} variant="strips" />
+		</section>
+	))}
 
 	<script is:inline>
-		const filterButtons = document.querySelectorAll('[data-filter]');
-		const tiles = document.querySelectorAll('[data-kind]');
+		// The chosen section goes in ?show= so reloading, sharing the link, or
+		// coming back from a project page keeps it.
+		const buttons = document.querySelectorAll('[data-show]');
+		const sections = document.querySelectorAll('[data-section]');
 
-		filterButtons.forEach((button) => {
+		const show = (id) => {
+			if (![...buttons].some((button) => button.dataset.show === id)) id = 'all';
+			buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.show === id)));
+			sections.forEach((section) => {
+				section.hidden = id !== 'all' && section.dataset.section !== id;
+			});
+		};
+
+		buttons.forEach((button) => {
 			button.addEventListener('click', () => {
-				const kind = button.dataset.filter;
-
-				filterButtons.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
-				tiles.forEach((tile) => {
-					tile.hidden = kind !== 'all' && tile.dataset.kind !== kind;
-				});
+				const id = button.dataset.show;
+				show(id);
+				const url = new URL(location.href);
+				if (id === 'all') url.searchParams.delete('show');
+				else url.searchParams.set('show', id);
+				history.replaceState(history.state, '', url);
 			});
 		});
+
+		show(new URLSearchParams(location.search).get('show') ?? 'all');
 	</script>
 </Base>

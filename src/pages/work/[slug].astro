@@ -14,6 +14,14 @@ interface Props {
 
 const { item } = Astro.props;
 const { Content } = await render(item);
+
+const spec = [
+	['period', item.data.period],
+	['role', item.data.role],
+	['team', item.data.team],
+	['stack', item.data.stack.join(', ')],
+	['highlights', item.data.highlights.join(', ')],
+].filter(([, value]) => value);
 ---
 
 <Base title={item.data.title} description={item.data.summary}>
@@ -21,7 +29,11 @@ const { Content } = await render(item);
 	<article>
 		<Reel src={item.data.reel} poster={item.data.poster} alt={item.data.title} />
 		<h1>{item.data.title} <em>- {item.data.description}</em></h1>
-		<p class="meta">{item.data.period}</p>
+		<dl class="spec">
+			{spec.map(([label, value]) => (
+				<><dt>{label}</dt><dd>{value}</dd></>
+			))}
+		</dl>
 		<p class="summary">{item.data.summary}</p>
 		{item.data.links.length > 0 && (
 			<nav class="links" aria-label={`${item.data.title} links`}>
@@ -44,7 +56,7 @@ const { Content } = await render(item);
 
 	<script is:inline>
 		// Coming from /work, going back through history restores its scroll
-		// position and filter. Otherwise the link just opens /work.
+		// position. Otherwise the link just opens /work.
 		document.querySelector('[data-back]').addEventListener('click', (event) => {
 			if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 			if (!document.referrer) return;

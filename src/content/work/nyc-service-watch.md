@@ -4,6 +4,7 @@ kind: project
 description: "Data Engineering & Analytics Pipeline"
 summary: "ELT pipeline and dashboard with Polars, PostgreSQL, dbt, and Streamlit."
 period: "2026"
+stack: ["Polars", "PostgreSQL", "dbt", "Streamlit"]
 reel: /media/nycservice.png
 poster: /media/nycservice.png
 links:

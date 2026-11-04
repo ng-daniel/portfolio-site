@@ -68,6 +68,9 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 			const canHover = window.matchMedia('(hover: hover)').matches;
 			const hoverReels = canHover ? reels.filter((reel) => reel.closest('.tile')) : [];
 			const scrollReels = reels.filter((reel) => !hoverReels.includes(reel));
+			// Tiles with a still image instead of a video. With a mouse, CSS
+			// reveals them on hover; otherwise they reveal on scroll like reels.
+			const scrollStills = canHover ? [] : Array.from(document.querySelectorAll('.tile img.reel'));
 
 			hoverReels.forEach((reel) => {
 				const tile = reel.closest('.tile');
@@ -95,10 +98,13 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 				});
 			}
 
-			if (scrollReels.length > 0 && 'IntersectionObserver' in window) {
+			if (scrollReels.length + scrollStills.length > 0 && 'IntersectionObserver' in window) {
 				const observer = new IntersectionObserver((entries) => {
 					for (const entry of entries) {
-						if (entry.isIntersecting && !reduceMotion.matches) {
+						const show = entry.isIntersecting && !reduceMotion.matches;
+						if (entry.target.tagName === 'IMG') {
+							entry.target.closest('.tile').toggleAttribute('data-playing', show);
+						} else if (show) {
 							entry.target.play().catch(() => {});
 						} else {
 							entry.target.pause();
@@ -106,7 +112,7 @@ const isCurrent = (href: string) => (href === '/' ? currentPath === '/' : curren
 					}
 				}, { threshold: 0.25 });
 
-				scrollReels.forEach((reel) => observer.observe(reel));
+				[...scrollReels, ...scrollStills].forEach((el) => observer.observe(el));
 			}
 		</script>
 	</body>
